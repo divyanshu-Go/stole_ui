@@ -1,20 +1,35 @@
 import React from 'react'
+import SearchBox from './SearchBox'
 
 const HeroSection = () => {
   return (
-    <section className="container py-24 sm:py-32 relative">
-      <img src="hero.png" className="absolute -z-10" alt="" />
-      <div className=" py-20 flex flex-col items-center gap-4 text-center">
-        <h1 className=" bg-gray-900 blurred-bg text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
+    <section className="pb-72 w-full py-32 flex flex-col items-center relative">
+      <img className="absolute -z-10" alt="" />
+      <video
+        className="btm-feather absolute top-0 left-0 w-full h-full object-cover mix-blend-lighten -z-10"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="sparkle2.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div className="h-52 w-full bg-[var(--background)] absolute -bottom-20 blur-2xl"></div>
+
+      <div className="py-20 flex flex-col items-center gap-4 text-center ">
+        <h1 className="text-[var(--secondary-fg)] text-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
           Free CSS Elements for
-          <br className="hidden sm:inline " />
+          <br/>
           Modern Web Development
         </h1>
-        <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+        <p className=" max-w-[38rem] font-extralight text-[var(--secondary-fg-small)] leading-normal text-md -tracking-tighter mt-5" >
           Discover and share beautiful CSS components. Build modern websites faster with free UI
           elements.
         </p>
       </div>
+      <SearchBox/>
+    
     </section>
   )
 }

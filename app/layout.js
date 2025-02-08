@@ -13,14 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "StoleUI - Free CSS Elements",
+  title: "Stole-UI - Free CSS Elements",
   description: "Discover and share beautiful CSS components",
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="flex flex-col">
           {children}
       </body>
     </html>

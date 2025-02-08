@@ -1,0 +1,31 @@
+backend/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── auth/
+│   │   │   │   ├── login.js
+│   │   │   │   ├── register.js
+│   │   │   │   └── logout.js
+│   │   │   ├── elements/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── add.js
+│   │   │   │   └── update.js
+│   │   │   ├── users/
+│   │   │   │   ├── profile.js
+│   │   │   │   └── updateProfile.js
+│   │   │   └── admin/
+│   │   │       └── verifyElement.js
+│   ├── lib/
+│   │   ├── auth.js
+│   │   ├── db.js
+│   │   └── middlewares.js
+│   ├── models/
+│   │   ├── user.js
+│   │   └── element.js
+│   └── utils/
+│       ├── constants.js
+│       ├── errorHandlers.js
+│       └── validators.js
+├── .env
+├── package.json
+└── server.js
