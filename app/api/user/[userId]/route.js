@@ -35,7 +35,7 @@ export async function PUT(request, {params}) {
     await DbConnect();
     
     const body = await request.json();
-    
+    const userId= (await params).userId;
     // TODO: Implement authentication and authorization check
     
     // Prepare update object
@@ -52,7 +52,7 @@ export async function PUT(request, {params}) {
     
     // Update user
     const updatedUser = await User.findByIdAndUpdate(
-      params.userId, 
+      userId, 
       updateData, 
       { new: true, runValidators: true }
     ).select('-passwordHash');

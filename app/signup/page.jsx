@@ -1,6 +1,6 @@
 "use client"
 
-import { SignupForm, LoginForm } from '@/components/Forms';
+import { SignupForm } from '@/components/Forms';
 import Link from 'next/link';
 
 export default function SignupPage() {

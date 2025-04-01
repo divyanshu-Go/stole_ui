@@ -67,7 +67,7 @@ const ProfilePage = () => {
   // Handle element deletion
   const handleDeleteElement = async (elementId) => {
     try {
-      await axios.delete(`/api/elements/${elementId}`);
+      await axios.delete(`/api/element/${elementId}`);
       setElements(elements.filter(el => el._id !== elementId));
       setDeleteDialogOpen(false);
     } catch (error) {
@@ -136,7 +136,7 @@ const ProfilePage = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => router.push(`/elements/${element._id}/edit`)}
+                          onClick={() => router.push(`/elements/elementId/${element._id}/edit`)}
                         >
                           <Edit className="w-4 h-4" />
                         </Button>

@@ -23,6 +23,7 @@ body {
   --hover-bg:rgb(56, 55, 55);
   --small-button-bg:#5146C7;
   --hover-small-button-bg:#493cd5;
+  --footer-bg:rgb(24, 24, 25);
 }
 
 @keyframes marquee-left-right {
@@ -68,12 +69,12 @@ body {
 
 .blurred-bg {
   background: rgba(34, 34, 34, 0.7); /* Semi-transparent background */
-  backdrop-filter: blur(10px); /* Applies the blur effect */
+  backdrop-filter: blur(8px); /* Applies the blur effect */
   -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
 }
 
 .nav-menu-text{
-  @apply text-sm font-light py-1 px-4 rounded-lg hover:bg-[var(--hover-bg)] tracking-widest transition ease-in-out delay-75 duration-300;
+  @apply text-sm flex items-center text-center align-text-bottom font-light py-1 px-4 rounded-lg hover:bg-[var(--hover-bg)] tracking-widest transition ease-in-out delay-0 duration-300;
 }
 
 .btn{
