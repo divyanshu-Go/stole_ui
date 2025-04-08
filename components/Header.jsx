@@ -4,10 +4,12 @@ import { Github, Plus, User, LoaderCircle, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useProfile } from "@/hooks/useProfile";
 import { useState } from "react";
+import { useUser } from "@/context/useContext";
 
 const Header = () => {
-  const { profile, loading } = useProfile();
+  const { user, loading } = useUser();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -56,14 +58,14 @@ const Header = () => {
                   <LoaderCircle className="mx-2 h-4 w-4" />
                 </span>
               </div>
-            ) : profile ? (
+            ) : user ? (
               // Show user profile when logged in
               <Link
-                href="/profile"
+                href={user?.role=='admin' ? "/admin-profile" : "/profile"}
                 className="btn hover:bg-opacity-90 transition-colors"
               >
                 <User className="mr-2 h-4 w-4" />
-                <span>{profile.name}</span>
+                <span>{user?.name}</span>
               </Link>
             ) : (
               // Show signup button when not logged in
@@ -118,14 +120,14 @@ const Header = () => {
                   <LoaderCircle className="mx-2 h-4 w-4" />
                 </span>
               </div>
-            ) : profile ? (
+            ) : user ? (
               <Link
                 href="/profile"
                 className="btn hover:bg-opacity-90 transition-colors flex items-center justify-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <User className="mr-2 h-4 w-4" />
-                <span>{profile.name}</span>
+                <span>{user?.name}</span>
               </Link>
             ) : (
               <Link href="/signup" className="btn flex items-center justify-center" onClick={() => setMobileMenuOpen(false)}>

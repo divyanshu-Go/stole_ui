@@ -99,9 +99,11 @@ export const LoginForm = () => {
       }
 
       if (data.user.role === 'admin') {
-        router.push('/admin-profile');
+        // router.push('/admin-profile');
+        window.location.href = '/'; 
       } else {
-        router.push('/');
+        // router.push('/');
+        window.location.href = '/';  // this will reload the whole page.
       }
     } catch (error) {
       setErrors({ submit: error.message });

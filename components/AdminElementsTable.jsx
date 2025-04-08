@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Edit, Pencil, Trash2 } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -9,14 +9,16 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import PopoverMenu from "./PopoverMenu"; // Make sure this path is correct
 
-const ElementsTable = ({
+const AdminElementsTable = ({
   elements,
   router,
   setElementToDelete,
   setDeleteDialogOpen,
+  setStatusUpdateInfo,
+  setStatusDialogOpen,
 }) => {
- 
   const getStatusColor = (status) => {
     switch (status) {
       case "approved":
@@ -27,6 +29,7 @@ const ElementsTable = ({
         return "bg-yellow-500";
     }
   };
+
   const getStatusHoverColor = (status) => {
     switch (status) {
       case "approved":
@@ -37,37 +40,25 @@ const ElementsTable = ({
         return "hover:bg-yellow-600";
     }
   };
-  
-
 
   return (
     <Card className="card">
       <CardHeader>
-        <CardTitle className="card-title">Your Contributions</CardTitle>
+        <CardTitle className="card-title">Element Submissions</CardTitle>
         <CardDescription className="card-description">
-          Manage your submitted elements
+          Manage and review submitted elements
         </CardDescription>
       </CardHeader>
       <CardContent>
         {elements.length === 0 ? (
-          <div className="flex flex-col gap-2">
-            <div className="font-medium text-center rounded bg-zinc-800 border-zinc-600 p-4">
-              No eLements submitted yet !
-            </div>
-            <Button
-                className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                onClick={() => router.push("/add-component")}
-              >
-                <Pencil className="w-4 h-4 mr-2" />
-                Create Now
-              </Button>
+          <div className="text-center bg-zinc-800 p-4 rounded border border-zinc-700">
+            No submissions yet!
           </div>
         ) : (
-          <div className="overflow-x-auto  py-4 text-base max-[600px]:text-[95%]">
-            <table className="w-full overflow-hidden rounded-lg ">
-              <thead className="">
-                <tr className=" text-center bg-zinc-800 border-b border-zinc-600">
-                  {/* <th className="py-4 px-4">Title</th> */}
+          <div className="overflow-x-auto overflow-y-hidden py-4 text-base max-[600px]:text-[95%]">
+            <table className="w-full rounded-lg">
+              <thead>
+                <tr className="text-center bg-zinc-800 border-b border-zinc-600">
                   <th className="py-4 px-6">Category</th>
                   <th className="py-4 px-6">Status</th>
                   <th className="py-4 px-6">Created</th>
@@ -76,49 +67,46 @@ const ElementsTable = ({
               </thead>
               <tbody className="bg-stone-950">
                 {elements.map((element) => (
-                  <tr
-                    key={element._id}
-                    className="border-b text-center border-zinc-700 "
-                  >
-                    {/* <td className="py-4 ">{element.title}</td> */}
-                    <td className="py-4 ">
+                  <tr key={element._id} className="text-center border-b border-zinc-700">
+                    <td className="py-4">
                       <Badge
                         variant="secondary"
-                        className={`bg-slate-300 capitalize pt-1 rounded-sm hover:bg-slate-400`}
+                        className="bg-slate-300 capitalize pt-1 rounded-sm hover:bg-slate-400"
                       >
-                        <p className="max-[600px]:text-[95%]">
-                          {element.category}
-                        </p>
+                        {element.category}
                       </Badge>
                     </td>
-                    <td className="py-4 ">
+                    <td className="py-4">
                       <Badge
-                        className={`${getStatusColor(
+                        className={`${getStatusColor(element.status)} ${getStatusHoverColor(
                           element.status
-                        )} ${getStatusHoverColor(element.status)} max-[600px]:text-50%] capitalize pt-1 rounded-sm text-stone-950 font-semibold`}
+                        )} capitalize pt-1 rounded-sm text-stone-950 font-semibold`}
                       >
-                        <p className="max-[600px]:text-[95%]">
-                          {element.status}
-                        </p>
+                        {element.status}
                       </Badge>
                     </td>
-                    <td className="py-4 text-sm text-zinc-400  max-[600px]:text-[95%]">
+                    <td className="py-4 text-sm text-zinc-400">
                       {format(new Date(element.createdAt), "MMM dd, yyyy")}
                     </td>
-                    <td className="py-4 ">
-                      <div className="flex gap-2 justify-center">
+                    <td className="py-4">
+                      <div className="flex justify-center gap-2">
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() =>
-                            router.push(
-                              `/elements/elementId/${element._id}/edit`
-                            )
+                            router.push(`/elements/elementId/${element._id}`)
                           }
-                          className=" p-3 hover:bg-slate-300"
+                          className="p-3 hover:bg-slate-300"
                         >
-                          <Edit className="w-4 h-4 " />
+                          <Eye className="w-4 h-4" />
                         </Button>
+
+                        <PopoverMenu
+                          element={element}
+                          setStatusUpdateInfo={setStatusUpdateInfo}
+                          setStatusDialogOpen={setStatusDialogOpen}
+                        />
+
                         <Button
                           variant="ghost"
                           size="sm"
@@ -126,7 +114,7 @@ const ElementsTable = ({
                             setElementToDelete(element);
                             setDeleteDialogOpen(true);
                           }}
-                          className=" p-3 hover:bg-slate-300 text-red-500 hover:text-red-700"
+                          className="p-3 text-red-500 hover:text-red-700 hover:bg-slate-300"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -143,4 +131,4 @@ const ElementsTable = ({
   );
 };
 
-export default ElementsTable;
+export default AdminElementsTable;

@@ -25,7 +25,7 @@ export default function ElementsPage() {
       try {
         const response = await axios.get("/api/element");
         const approvedElements = response.data.components.filter(
-          (el) => el.status === "pending"
+          (el) => el.status === "approved"
         );
         setElements(approvedElements);
       } catch (err) {

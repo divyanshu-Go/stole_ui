@@ -28,7 +28,7 @@ export default function CategoryPage() {
         const Category = category.charAt(0).toUpperCase() + category.slice(1);
         // Filter elements by category and approved status
         const categoryElements = response.data.components.filter(
-          (el) => el.category === Category && el.status === "pending"
+          (el) => el.category === Category && el.status === "approved"
         );
 
         setElements(categoryElements);
