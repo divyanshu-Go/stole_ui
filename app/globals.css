@@ -9,6 +9,8 @@ body {
 
 /* Variables */
 :root {
+
+  
   --background: rgb(11, 11, 11);
   --foreground: rgb(244, 244, 244);
   --secondary-bg:#212222;
@@ -16,6 +18,7 @@ body {
   --secondary-fg-small:#cdd8ec;
   --button-bg: #5146c7;
   --button-fg: #D9E4F4;
+  --button-bg-hover:#4337c6;
   --input-box-bg:#D1D5DB;
   --tertiary-fg: #6A6E73;
   --light-gray:#2B2C2D;
@@ -24,7 +27,113 @@ body {
   --small-button-bg:#5146C7;
   --hover-small-button-bg:#493cd5;
   --footer-bg:rgb(24, 24, 25);
+
+  --destructive-color: #ef4444;   /* For logout button */
+  --destructive-hover: #b91c1c;   /* Logout button hover */
+  --create-color: #10b981;        /* For create button */
+  --create-hover: #059669;        /* Create button hover */
+  --edit-color: #6366f1;          /* For edit profile button */
+  --edit-hover: #4f46e5;          /* Edit profile button hover */
+
+
+  --border-dark:rgb(123, 124, 126);
+
+  --form-bg:#303036;
+  --form-input-bg:rgb(25, 24, 26);
+  --focus-box: #8b5cf6;
+
+  --error-color:rgb(255, 46, 46);
+
+  --poppins:'Poppins';
+
+  --accent-color:rgb(255, 215, 93);
+  --border-d:"zinc-700";
+
+
 }
+
+
+/*  ELEMENT ANIMATION  */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.4s ease forwards;
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s ease-out forwards;
+  will-change: opacity, transform;
+}
+/*  ELEMENT ANIMATION  */
+
+
+
+
+
+/*  PROFILE CARD  */
+.card{
+  @apply mb-8 text-slate-400 bg-zinc-900 border-zinc-500/50 border-4 mx-auto max-w-[1000px] w-full
+}
+.card-title{
+  @apply text-2xl text-slate-300 font-bold
+}
+.card-description{
+  @apply text-sm text-slate-500
+}
+.title-text{
+  @apply text-lg font-semibold bg-stone-900 rounded inline px-3 py-1 
+}
+/*  PROFILE CARD  */
+
+
+/*  Category Selector  */
+.card-category-selector{
+  @apply text-slate-400 bg-zinc-900 border-zinc-500/50 border-4 mx-auto max-w-7xl w-full
+}
+/*  Category Selector  */
+
+
+/*  ELEMENTS TABLE  */
+.card{
+  @apply mb-8 text-slate-400 bg-zinc-900 border-zinc-500/50 border-4 mx-auto max-w-[1000px] w-full
+}
+/*  ELEMENTS TABLE  */
+
+.update-form{
+  @apply mx-auto text-slate-400 bg-zinc-900 border-zinc-500/50 border-4 max-w-[800px] w-full
+}
+
+/*  FORM CSS  */
+.form{
+  @apply bg-[var(--form-bg)] outline outline-offset-4 outline-violet-300
+   rounded-lg mx-auto my-16 max-w-[800px] w-full px-8 py-6
+}
+.form-label{
+  @apply px-3 py-1 rounded text-sm font-medium tracking-wider text-[var(--foreground)] bg-[var(--form-input-bg)] 
+}
+.form-input{
+  @apply w-full px-3 py-2 outline outline-1 outline-[var(--border-dark)] rounded-md 
+   bg-[var(--form-input-bg)] text-[var(--foreground)]  focus:outline-none focus:outline-[3px] focus:outline-[var(--focus-box)]
+}
+.form-button{
+  @apply w-full my-4 bg-[var(--button-bg)] text-[var(--foreground)] p-3 rounded-md font-medium 
+  hover:bg-[var(--button-bg-hover)]  hover:-outline-offset-2 hover:outline-none hover:outline-[2.5px] hover:outline-violet-400 
+  disabled:opacity-70 active:bg-violet-600/50
+}
+/*  FORM CSS  */
+
 
 @keyframes marquee-left-right {
   0% {

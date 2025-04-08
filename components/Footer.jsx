@@ -6,7 +6,7 @@ import { Twitter, Github, Mail, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[var(--footer-bg)] rounded-sm py-10 flex flex-col justify-center items-center mb-1 -mx-5">
+    <footer className="bg-[var(--footer-bg)] rounded-sm py-10 flex flex-col justify-center items-center m-1">
       <div className=" container px-8 flex flex-col items-center justify-between gap-6 md:flex-row">
         {/* About Section */}
         <div className="text-center flex flex-col items-center flex-1">

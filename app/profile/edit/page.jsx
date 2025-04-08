@@ -124,19 +124,18 @@ export default function EditProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-900 py-8 px-4">
-      <div className="max-w-2xl mx-auto">
-        <Card className="bg-zinc-800 border-zinc-700 text-slate-200">
+    
+        <Card className="update-form">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">Edit Profile</CardTitle>
-            <CardDescription className="text-slate-400">
+            <CardTitle className="card-title">Edit Profile</CardTitle>
+            <CardDescription className="card-description">
               Update your profile information
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               {/* Name Field */}
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <Label htmlFor="name" className="text-slate-200">Name</Label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -148,7 +147,7 @@ export default function EditProfilePage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     className={`pl-10 bg-zinc-700 border-zinc-600 text-slate-200 placeholder:text-slate-400
-                      ${formErrors.name ? 'border-red-500 focus:border-red-500' : 'focus:border-blue-500'}`}
+                      ${formErrors.name ? 'border-red-500 focus:border-red-500' : 'focus:border-indigo-500'}`}
                     placeholder="Enter your name"
                   />
                 </div>
@@ -171,7 +170,7 @@ export default function EditProfilePage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     className={`pl-10 bg-zinc-700 border-zinc-600 text-slate-200 placeholder:text-slate-400
-                      ${formErrors.email ? 'border-red-500 focus:border-red-500' : 'focus:border-blue-500'}`}
+                      ${formErrors.email ? 'border-red-500 focus:border-red-500' : 'focus:border-indigo-500'}`}
                     placeholder="Enter your email"
                   />
                 </div>
@@ -184,7 +183,7 @@ export default function EditProfilePage() {
               <Button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white transition-colors my-2"
               >
                 {submitting ? (
                   <>
@@ -198,7 +197,6 @@ export default function EditProfilePage() {
             </form>
           </CardContent>
         </Card>
-      </div>
-    </div>
+     
   );
 }

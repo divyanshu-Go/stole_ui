@@ -14,8 +14,8 @@ const Header = () => {
   };
 
   return (
-    <header className="flex flex-col fixed top-1 left-1/2 -translate-x-1/2 z-50 w-full px-4 ">
-      <div className="flex h-14 items-center justify-between px-8 blurred-bg bg-[var(--secondary-bg)] text-[var(--secondary-fg)] rounded-lg">
+    <header className=" flex flex-col fixed top-1 left-1/2 -translate-x-1/2 z-50 w-full px-1 ">
+      <div className=" flex h-14 items-center justify-between px-8 blurred-bg bg-[var(--secondary-bg)] text-[var(--secondary-fg)] rounded-lg">
         {/* Logo and Navigation */}
         <div className="flex items-center w-full gap-20 text-nowrap mr-4">
           <Link href="/" className="flex items-center space-x-2">
