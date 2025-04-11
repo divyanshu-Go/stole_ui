@@ -95,15 +95,13 @@ const ElementCard = ({ element }) => {
           ) : (
             <button
               onClick={handleFakeLikes}
-              className={`flex items-center gap-1 transition-colors ${
-                fakeLiked > likes.length
-                  ? "text-red-400"
-                  : "text-zinc-400 hover:text-red-500"
-              }`}
+              className={`flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-red-400 transition-all duration-200 `}
+              
             >
               <Heart
                 size={16}
                 fill={fakeLiked > likes.length ? "#fa5050" : "none"}
+                className={fakeLiked > likes.length ? " text-red-400" : "text-zinc-400 hover:text-red-500"}
               />
               <span className="text-xs font-semibold">{fakeLiked}</span>
             </button>
@@ -120,14 +118,14 @@ const ElementCard = ({ element }) => {
               onClick={() =>
                 toast.info("You need to log in to save this component.")
               }
-              className="flex items-center gap-1 transition-colors text-zinc-400 hover:text-yellow-500"
+              className="flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-blue-400 transition-all duration-200"
             >
               <Bookmark size={16} fill="none" />
               <span className="text-xs font-semibold">{saves.length}</span>
             </button>
           )}
 
-          <button className="flex items-center gap-1 text-zinc-400 hover:text-green-400 ">
+          <button className="flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-green-400 transition-all duration-200 ">
              <MessageSquare size={16} />
             <span className="text-xs font-semibold">{comments.length}</span>
           </button>

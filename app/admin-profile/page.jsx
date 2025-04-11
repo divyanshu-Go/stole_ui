@@ -6,9 +6,9 @@ import axios from "axios";
 
 import ProfileDashboard from "@/components/ProfileDashboard";
 import DeleteDialog from "@/components/DeleteDialog";
-// import StatusDialog from "@/components/StatusDialog";
 import AdminElementsTable from "@/components/AdminElementsTable";
 import LoadingScreen from "@/components/LoadingScreen";
+import StatusDialog from "@/components/StatusDialog";
 
 const AdminProfilePage = () => {
   const router = useRouter();
@@ -117,12 +117,12 @@ const AdminProfilePage = () => {
       />
 
       {/* Update Confirmation Dialog */}
-      {/* <StatusDialog
+      <StatusDialog
         statusDialogOpen={statusDialogOpen}
         setStatusDialogOpen={setStatusDialogOpen}
         statusUpdateInfo={statusUpdateInfo}
         handleStatusUpdate={handleStatusUpdate}
-      /> */}
+      />
     </div>
   );
 };

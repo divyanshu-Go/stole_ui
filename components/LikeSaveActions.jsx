@@ -97,7 +97,7 @@ export default function LikeSaveActions({ element }) {
 
           {/* Save button */}
         <div className="relative">
-        <button className="flex items-center gap-1 text-zinc-400 hover:text-green-400 ">
+        <button className="flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 transition-all duration-200 hover:text-green-400 ">
           <MessageSquare size={20}  />
           <span className="text-xs font-semibold">{comments.length}</span>
         </button>

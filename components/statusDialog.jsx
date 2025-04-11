@@ -1,11 +1,11 @@
 import React from "react";
 
-const StatusDialog = ({
+export default function StatusDialog ({
   statusDialogOpen,
   setStatusDialogOpen,
   statusUpdateInfo,
   handleStatusUpdate
-}) => {
+}) {
   if (!statusDialogOpen) return null;
 
   return (
@@ -44,4 +44,3 @@ const StatusDialog = ({
   );
 };
 
-export default StatusDialog;

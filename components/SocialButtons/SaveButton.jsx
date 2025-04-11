@@ -21,11 +21,9 @@ export default function SaveButton({ elementId, initialSaved, initialCount, size
   return (
     <button
       onClick={handleSave}
-      className={`flex items-center gap-1 transition-colors ${
-        saved ? "text-blue-400" : "text-zinc-400 hover:text-blue-500"
-      }`}
+      className={`flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-blue-400 transition-all duration-200 `}
     >
-      <Bookmark size={size} fill={saved ? "#60a5fa" : "none"} />
+      <Bookmark size={size} fill={saved ? "#60a5fa" : "none"} className={saved ? "text-blue-400" : "text-zinc-400 hover:text-blue-500"}/>
       <span className="text-xs font-semibold">{count}</span>
     </button>
   );
