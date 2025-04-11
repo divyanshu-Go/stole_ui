@@ -1,14 +1,34 @@
 "use client";
 
-import { Github, Plus, User, LoaderCircle, Menu, X } from "lucide-react";
-import Link from "next/link";
-import { useProfile } from "@/hooks/useProfile";
-import { useState } from "react";
-import { useUser } from "@/context/useContext";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Link from 'next/link';
+import { LoaderCircle, Menu, Plus, User, X } from "lucide-react";
+import { formatUserName } from "@/lib/Utils/formatName";
 
 const Header = () => {
-  const { user, loading } = useUser();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] =useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+  
+      try {
+        const res = await axios.get("/api/user/profile");
+        setUser(res.data.user);
+      } catch (err) {
+        if (err.response?.status !== 401) {
+          console.error("Unexpected error fetching user:", err);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchProfile();
+  }, []);
 
 
   const toggleMobileMenu = () => {
@@ -21,8 +41,8 @@ const Header = () => {
         {/* Logo and Navigation */}
         <div className="flex items-center w-full gap-20 text-nowrap mr-4">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="flex items-center gap-2 text-[var(--foreground)] font-bold text-lg tracking-wider">
-              <img src="D_logo_dark_mode.png" alt="logo" width={24} />
+            <span className="flex items-center gap-3 text-[var(--foreground)] font-bold text-lg tracking-wider">
+              <img src="Stole-Ui.png" alt="logo" width={26} />
               Stole UI
             </span>
           </Link>
@@ -34,8 +54,8 @@ const Header = () => {
             <Link href="/challenges" className="nav-menu-text">
               Challenges
             </Link>
-            <Link href="/blog" className="nav-menu-text">
-              Blog
+            <Link href="/about" className="nav-menu-text">
+              About Us
             </Link>
           </nav>
         </div>
@@ -65,7 +85,7 @@ const Header = () => {
                 className="btn hover:bg-opacity-90 transition-colors"
               >
                 <User className="mr-2 h-4 w-4" />
-                <span>{user?.name}</span>
+                <span>{formatUserName(user?.name)}</span>
               </Link>
             ) : (
               // Show signup button when not logged in
@@ -93,7 +113,7 @@ const Header = () => {
 
       {/* Dropdown menu in mobile view */}
       {mobileMenuOpen && (
-        <div className="md:hidden w-full mt-2 py-3 px-4 rounded-lg blurred-bg bg-[var(--secondary-bg)] text-[var(--secondary-fg)] flex flex-col gap-4 shadow-md">
+        <div className="md:hidden w-full mt-1 py-3 px-4 rounded-lg blurred-bg bg-[var(--secondary-bg)] text-[var(--secondary-fg)] flex flex-col gap-4 shadow-md">
           <nav className=" flex flex-col space-y-3">
             <Link href="/elements" className="nav-menu-text h-10" onClick={() => setMobileMenuOpen(false)}>
               Elements

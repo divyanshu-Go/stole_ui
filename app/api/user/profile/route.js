@@ -8,7 +8,7 @@ export async function GET(req) {
     // Get token from cookie
     const authCookie = req.cookies.get("auth_token");
     if (!authCookie) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      return NextResponse.json({ user: null, message:"Not Authenticated" });
     }
 
     const token = authCookie.value;
@@ -22,7 +22,7 @@ export async function GET(req) {
     await DbConnect();
 
     // Fetch user data (excluding password)
-    const user = await User.findById(payload.userId).select("-password");
+    const user = await User.findById(payload.user._id).select("-password");
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

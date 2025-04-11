@@ -10,6 +10,7 @@ export async function GET(request, { params }) {
     await DbConnect();
     const elementId = (await params).id;
 
+    
     // Find element by ID
     const element = await Element.findById(elementId).populate(
       "authorId",
@@ -57,7 +58,7 @@ export async function DELETE(req, { params }) {
       return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
-    const user = await User.findById(payload.userId).select("-password");
+    const user = await User.findById(payload.user._id).select("-password");
 
     // Find and delete the element
     const component = await Element.findById(elementId);
@@ -72,7 +73,7 @@ export async function DELETE(req, { params }) {
       );
     }
 
-    if (component.authorId.toString() !== payload.userId && user.role != 'admin') {
+    if (component.authorId.toString() != payload.user._id && user.role != 'admin') {
       return NextResponse.json(
         { error: "Not authorized to delete this component" },
         { status: 403 }
@@ -114,7 +115,7 @@ export async function PUT(req, { params }) {
       return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
-    const user = await User.findById(payload.userId).select("-password");
+    const user = await User.findById(payload.user._id).select("-password");
 
     // Parse the request body
     const data = await req.json();

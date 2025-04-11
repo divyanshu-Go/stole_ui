@@ -3,37 +3,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { format } from "date-fns";
-import { User, LogOut, Eye, Trash2, Settings } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+
 import ProfileDashboard from "@/components/ProfileDashboard";
 import DeleteDialog from "@/components/DeleteDialog";
-import StatusDialog from "@/components/statusDialog";
-import PopoverMenu from "@/components/PopoverMenu";
+import StatusDialog from "@/components/StatusDialog";
 import AdminElementsTable from "@/components/AdminElementsTable";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const AdminProfilePage = () => {
   const router = useRouter();
@@ -111,7 +86,8 @@ const AdminProfilePage = () => {
   const handleLogout = async () => {
     try {
       await axios.post("/api/auth/logout");
-      router.push("/");
+      // router.push("/");
+      window.location.href = '/';  //this will refresh the page
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -119,22 +95,10 @@ const AdminProfilePage = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-pulse text-lg">Loading...</div>
-      </div>
+      <LoadingScreen message="Loading Dashboard..." />
     );
   }
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "approved":
-        return "bg-green-500";
-      case "rejected":
-        return "bg-red-500";
-      default:
-        return "bg-yellow-500";
-    }
-  };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">

@@ -117,7 +117,8 @@ export const SignupForm = () => {
         throw new Error(data.error || "Signup failed");
       }
 
-      router.push("/");
+      // router.push("/");
+      window.location.href='/';
     } catch (error) {
       setErrors({ submit: error.message });
     } finally {

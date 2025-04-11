@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import CategoryRow from "./components/CategoryRow";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const CATEGORIES = [
   "Button",
@@ -45,11 +46,7 @@ export default function ElementsPage() {
   }, {});
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
-        <div className="animate-pulse">Loading elements...</div>
-      </div>
-    );
+    return <LoadingScreen message="Loading elements..." />;
   }
 
   if (error) {

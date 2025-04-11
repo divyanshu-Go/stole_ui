@@ -100,7 +100,7 @@ export const LoginForm = () => {
 
       if (data.user.role === 'admin') {
         // router.push('/admin-profile');
-        window.location.href = '/'; 
+        window.location.href = '/admin-profile'; 
       } else {
         // router.push('/');
         window.location.href = '/';  // this will reload the whole page.

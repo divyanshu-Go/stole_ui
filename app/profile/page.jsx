@@ -6,6 +6,7 @@ import axios from "axios";
 import ProfileDashboard from "@/components/ProfileDashboard";
 import ElementsTable from "@/components/ElementsTable";
 import DeleteDialog from "@/components/DeleteDialog";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -60,9 +61,7 @@ const ProfilePage = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-pulse text-lg">Loading...</div>
-      </div>
+      <LoadingScreen message="Loading Dashboard..."/>
     );
   }
 

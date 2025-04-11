@@ -1,5 +1,4 @@
 import React from 'react'
-import SearchBox from './SearchBox'
 
 const HeroSection = () => {
   return (
@@ -11,7 +10,7 @@ const HeroSection = () => {
         muted
         playsInline
       >
-        <source src="sparkle2.mp4" type="video/mp4" />
+        <source src="sparkle.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="h-52 w-full bg-[var(--background)] absolute -bottom-20 blur-2xl"></div>

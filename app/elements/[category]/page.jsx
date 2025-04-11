@@ -11,7 +11,6 @@ export default function CategoryPage() {
   // Get the category parameter from the URL using Next.js routing
   const params = useParams();
   const category = params.category;
-  console.log(category);
   // State management for elements, loading state, and errors
   const [elements, setElements] = useState([]);
   const [loading, setLoading] = useState(true);

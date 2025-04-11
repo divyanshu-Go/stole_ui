@@ -24,7 +24,7 @@ export async function POST(req) {
     const data = await req.json();
 
     // Validate required fields
-    const { title, description, htmlCode, cssCode, category, tags} = data;
+    const { title, description, htmlCode, cssCode, category, tags, likes} = data;
 
     if (
       !htmlCode ||
@@ -48,9 +48,10 @@ export async function POST(req) {
       htmlCode,
       cssCode,
       category,
-      authorId: payload.userId,
+      authorId: payload.user._id,
       status: "pending", // Default status
       tags: tags || [],
+      likes: likes || [],
     });
 
     // Save the element

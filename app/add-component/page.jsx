@@ -10,16 +10,11 @@ import {
   Grid,
   MoreHorizontal,
 } from "lucide-react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+
 import EditorAndPreviewComponent from "@/components/EditorAndPreviewComponent";
 import Button from "@/components/Button";
 import CategorySelector from "@/components/CategorySelector";
+import { toast } from "sonner";
 
 export default function ComponentSubmission() {
   const [element, setElement] = useState({
@@ -48,7 +43,7 @@ export default function ComponentSubmission() {
         throw new Error("Failed to submit component");
       }
 
-      alert("Component submitted successfully!");
+      toast.success("Submitted Successfully")
     } catch (err) {
       setError(err.message);
     } finally {
@@ -84,6 +79,8 @@ export default function ComponentSubmission() {
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
+  
+
   return (
     <div className="max-w-7xl mx-auto w-full text-slate-200">
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -101,9 +98,9 @@ export default function ComponentSubmission() {
 
 
          {/* Submit Button */}
-         <div className="flex items-center gap-4">
+         <div className="flex flex-col-reverse items-center gap-4">
           <Button text="Submit Component" loadingText="Submitting..." isLoading={loading} type="submit" />
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-600 bg-red-300 p-2 w-full font-medium text-sm text-center rounded">{error}</p>}
         </div>
 
       </form>

@@ -30,7 +30,7 @@ export async function POST(req) {
     }
 
     // Generate token and set cookie
-    const token = await generateToken(user._id.toString());
+    const token = await generateToken(user);
 
     // Create response with cookie
     const response = NextResponse.json(

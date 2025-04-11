@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { UserProvider } from "@/context/useContext";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,11 +19,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`font-[Poppins] relative min-h-screen flex flex-col `}>
-        <UserProvider>
+        
         <Header />
         <main className="mt-16 mx-auto px-5 py-16 container flex flex-col flex-1">{children}</main>
         <Footer />
-        </UserProvider>
+
+        <Toaster position="top-right" richColors />
+        
       </body>
     </html>
   );

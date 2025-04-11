@@ -1,5 +1,4 @@
 import React from 'react'
-import AnimatedSection from './AnimatedSection'
 
 const FeaturedElements = () => {
   return (
