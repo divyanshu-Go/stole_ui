@@ -121,8 +121,8 @@ const Header = () => {
             <Link href="/challenges" className="nav-menu-text h-10" onClick={() => setMobileMenuOpen(false)}>
               Challenges
             </Link>
-            <Link href="/blog" className="nav-menu-text h-10" onClick={() => setMobileMenuOpen(false)}>
-              Blog
+            <Link href="/about" className="nav-menu-text h-10" onClick={() => setMobileMenuOpen(false)}>
+              About us
             </Link>
           </nav>
           
