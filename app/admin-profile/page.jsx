@@ -8,7 +8,7 @@ import ProfileDashboard from "@/components/ProfileDashboard";
 import DeleteDialog from "@/components/DeleteDialog";
 import AdminElementsTable from "@/components/AdminElementsTable";
 import LoadingScreen from "@/components/LoadingScreen";
-import StatusDialog from "@/components/StatusDialog";
+import UpdateDialog from "@/components/UpdateDialog";
 
 const AdminProfilePage = () => {
   const router = useRouter();
@@ -117,7 +117,7 @@ const AdminProfilePage = () => {
       />
 
       {/* Update Confirmation Dialog */}
-      <StatusDialog
+      <UpdateDialog
         statusDialogOpen={statusDialogOpen}
         setStatusDialogOpen={setStatusDialogOpen}
         statusUpdateInfo={statusUpdateInfo}
