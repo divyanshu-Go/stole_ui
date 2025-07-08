@@ -1,99 +1,69 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import axios from "axios";
+import { notFound } from "next/navigation";
+import { getApprovedElements } from "@/lib/api";
 import ElementCard from "@/app/elements/components/ElementCard";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
-// This component displays all elements for a specific category
-export default function CategoryPage() {
-  // Get the category parameter from the URL using Next.js routing
-  const params = useParams();
-  const category = params.category;
-  // State management for elements, loading state, and errors
-  const [elements, setElements] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const CATEGORIES = [
+  "Button",
+  "Card",
+  "Loader",
+  "Switch",
+  "Form",
+  "Pattern",
+  "Other",
+];
 
-  // Fetch elements when the component mounts or category changes
-  useEffect(() => {
-    const fetchCategoryElements = async () => {
-      try {
-        setLoading(true);
+export default async function CategoryPage({ params }) {
+  const categoryParam = params.category;
+  const Category = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
 
-        // Fetch all elements and filter by category
-        const response = await axios.get("/api/element");
-        const Category = category.charAt(0).toUpperCase() + category.slice(1);
-        // Filter elements by category and approved status
-        const categoryElements = response.data.components.filter(
-          (el) => el.category === Category && el.status === "approved"
-        );
+  // Invalid category fallback
+  if (!CATEGORIES.includes(Category)) {
+    notFound(); // shows 404
+  }
 
-        setElements(categoryElements);
-        setError(null);
-      } catch (err) {
-        setError("Failed to load elements for this category");
-        console.error("Error fetching category elements:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategoryElements();
-  }, [category]); // Re-fetch when category changes
-
-  // Loading state display
-  if (loading) {
+  let approvedElements = [];
+  try {
+    const allApproved = await getApprovedElements();
+    approvedElements = allApproved.filter((el) => el.category === Category);
+  } catch (err) {
+    console.error("Fetch error:", err);
     return (
       <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
-        <div className="animate-pulse text-xl text-zinc-400">
-          Loading <span className="capitalize">{category}</span> elements...
-        </div>{" "}
+        <div className="text-red-400">Failed to load elements for this category.</div>
       </div>
     );
   }
 
-  // Error state display
-  if (error) {
-    return (
-      <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
-        <div className="text-red-400">{error}</div>
-      </div>
-    );
-  }
-
-  // Empty state display
-  if (elements.length === 0) {
+  if (approvedElements.length === 0) {
     return (
       <div className="min-h-screen bg-zinc-900 text-white">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-white mb-8 capitalize">
-            {category} Elements
+            {Category} Elements
           </h1>
           <p className="text-zinc-400 text-center mt-4">
-            🚫 No {category} elements found. Check back later!
+            🚫 No {Category} elements found. Check back later!
           </p>
         </div>
       </div>
     );
   }
 
-  // Main content display
   return (
-    <div className=" bg-transparent">
-      <div className="container mx-auto space-y-4">
+    <div className="bg-transparent min-h-screen">
+      <div className="container mx-auto space-y-4 py-8">
         <CardHeader>
-          <CardTitle className="text-4xl m-0 text-slate-300 font-bold capitalize ">
-            {category} Elements
+          <CardTitle className="text-4xl m-0 text-slate-300 font-bold capitalize">
+            {Category} Elements
           </CardTitle>
-          <CardDescription className="card-text-xl m-0 text-slate-400 ">
-            Open-Source UI {category} elements made with CSS
+          <CardDescription className="card-text-xl m-0 text-slate-400">
+            Open-Source UI {Category} elements made with CSS
           </CardDescription>
         </CardHeader>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4">
-          {elements.map((element, index) => (
+          {approvedElements.map((element, index) => (
             <div
               key={element._id}
               className="opacity-0 animate-fade-in-up"

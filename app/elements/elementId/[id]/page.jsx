@@ -1,42 +1,38 @@
-"use client";
-
 import React from "react";
-import { useParams } from "next/navigation";
-import { useElement } from "@/hooks/useElement";
 import EditorAndPreviewComponent from "@/components/EditorAndPreviewComponent";
-import LoadingScreen from "@/components/LoadingScreen";
 import CommentsSection from "@/components/CommentsSection";
-import { useProfile } from "@/hooks/useProfile";
 import LikeSaveActions from "@/components/LikeSaveActions";
+import {getElementById} from "@/lib/api"
 
-export default function ElementPage() {
-  const params = useParams();
+
+export default async function ElementPage({ params }) {
   const elementId = params.id;
-  const { element, setElement, loading, error } = useElement(elementId);
-  const { user } = useProfile();
 
+  let element;
 
-
-  if (loading) {
-    return <LoadingScreen message="Loading elements..." />;
-  }
-
-  if (error) {
+  try {
+    element = await getElementById(elementId);
+  } catch (error) {
     return (
       <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
-        <div className="text-red-400">{error}</div>
+        <div className="text-red-400">Failed to load element: {error.message}</div>
+      </div>
+    );
+  }
+
+  if (!element) {
+    return (
+      <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
+        <div className="text-red-400">Element not found.</div>
       </div>
     );
   }
 
   return (
     <div className="max-w-7xl mx-auto w-full text-slate-200 flex flex-col gap-6">
-      {/* Editor and Preview Component */}
-      <EditorAndPreviewComponent element={element} setElement={setElement} />
-
+      <EditorAndPreviewComponent element={element} />
       <LikeSaveActions element={element} />
-      
-      <CommentsSection elementId={element._id} user={user} />
+      <CommentsSection elementId={element._id} />
     </div>
   );
 }

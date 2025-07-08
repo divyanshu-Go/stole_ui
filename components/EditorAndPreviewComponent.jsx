@@ -1,3 +1,4 @@
+"use client"
 import ElementPreview from "@/app/elements/components/ElementPreview";
 import React, { useEffect, useMemo, useState } from "react";
 import CodeEditor from "@/app/elements/components/CodeEditor";

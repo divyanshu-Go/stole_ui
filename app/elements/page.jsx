@@ -1,68 +1,26 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import axios from "axios";
+// ✅ This is now a Server Component
 import CategoryRow from "./components/CategoryRow";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import LoadingScreen from "@/components/LoadingScreen";
+import { getApprovedElements } from "@/lib/api";
 
-const CATEGORIES = [
-  "Button",
-  "Card",
-  "Loader",
-  "Switch",
-  "Form",
-  "Pattern",
-  "Other",
-];
+// Element categories to group by
+const CATEGORIES = ["Button", "Card", "Loader", "Switch", "Form", "Pattern", "Other"];
 
-export default function ElementsPage() {
-  const [elements, setElements] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchElements = async () => {
-      try {
-        const response = await axios.get("/api/element");
-        const approvedElements = response.data.components.filter(
-          (el) => el.status === "approved"
-        );
-        setElements(approvedElements);
-      } catch (err) {
-        setError("Failed to load elements");
-        console.error("Error fetching elements:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchElements();
-  }, []);
+export default async function ElementsPage() {
+  const elements = await getApprovedElements();
 
   const elementsByCategory = CATEGORIES.reduce((acc, category) => {
     acc[category] = elements.filter((el) => el.category === category);
     return acc;
   }, {});
 
-  if (loading) {
-    return <LoadingScreen message="Loading elements..." />;
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
-        <div className="text-red-400">{error}</div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-transparent text-white">
       <div className="container mx-auto space-y-16">
         <CardHeader>
           <CardTitle className="text-4xl m-0 text-slate-300 font-bold capitalize ">
-            Explore UI Elements{" "}
+            Explore UI Elements
           </CardTitle>
           <CardDescription className="card-text-xl m-0 text-slate-400 ">
             Discover open-source CSS UI components organized by categories.
