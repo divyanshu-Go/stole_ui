@@ -44,7 +44,6 @@ const ElementSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Button", "Card", "Loader", "Switch", "Form", "Pattern", "Other"],
       default: "Other",
     },
     authorId: {

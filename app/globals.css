@@ -182,14 +182,12 @@ body {
 }
 
 .blurred-bg {
-  background: rgba(34, 34, 34, 0.7); /* Semi-transparent background */
-  backdrop-filter: blur(8px); /* Applies the blur effect */
+   background: rgba(34, 34, 34, 0.86); /*Semi-transparent background */
+  backdrop-filter: blur(6px); /*Applies the blur effect */
   -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
 }
 
-.nav-menu-text{
-  @apply text-sm flex items-center text-center align-text-bottom font-light py-1 px-4 rounded-lg hover:bg-[var(--hover-bg)] tracking-widest transition ease-in-out delay-0 duration-300;
-}
+
 
 .btn{
   @apply  flex items-center px-4 py-2 bg-[var(--button-bg)]  text-white text-sm font-medium rounded-lg hover:bg-[#4338CA];
@@ -295,3 +293,66 @@ a:hover {
     @apply bg-background text-foreground;
   } */
 }
+
+
+@layer Navbar {
+  #nav-icon3 {
+  @apply w-[45px] h-[45px] relative transition-all duration-500 ease-in-out cursor-pointer rounded ;
+}
+
+#nav-icon3{
+   background: rgba(34, 34, 34, 0.86);
+  backdrop-filter: blur(6px); 
+}
+
+#nav-icon3 span {
+  @apply absolute h-[3.5px] w-[25px] bg-[var(--button-bg)] rounded opacity-100 left-[10px] top-[13px] rotate-0 transition-all duration-200 ease-in-out;
+}
+
+
+  #nav-icon3 span:nth-child(1) {
+    top: 13px;
+  }
+
+  #nav-icon3 span:nth-child(2),
+  #nav-icon3 span:nth-child(3) {
+    top: 21px;
+  }
+
+  #nav-icon3 span:nth-child(4) {
+    top: 29px;
+  }
+
+  #nav-icon3.open span:nth-child(1) {
+    top: 20px;
+    width: 0%;
+    left: 50%;
+  }
+
+  #nav-icon3.open span:nth-child(2) {
+    transform: rotate(45deg);
+  }
+
+  #nav-icon3.open span:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  #nav-icon3.open span:nth-child(4) {
+    top: 10px;
+    width: 0%;
+    left: 50%;
+  }
+
+  .nav-btn {
+  @apply w-8 h-8 flex items-center justify-center bg-[var(--button-bg)] text-white rounded cursor-pointer transition-all duration-200 ease-in-out hover:bg-[var(--button-bg-hover)] ;
+ }
+
+ .nav-menu-text{
+  @apply text-sm flex items-center text-center align-text-bottom font-light py-1 px-4 rounded-lg  tracking-widest transition ease-in-out delay-0 duration-300;
+ } 
+
+}
+
+
+
+

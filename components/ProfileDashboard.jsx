@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-const ProfileDashboard = ({ user,  handleLogout }) => {
+const ProfileDashboard = ({ user, handleLogout }) => {
   const router = useRouter();
 
   return (
@@ -92,6 +92,14 @@ const ProfileDashboard = ({ user,  handleLogout }) => {
               >
                 <Pencil className="w-4 h-4 mr-2" />
                 Create
+              </Button>
+              <Button
+                className="border border-indigo-500 text-indigo-300 hover:bg-indigo-700 hover:text-white"
+                variant="outline"
+                onClick={() => router.push("/add-category")}
+              >
+                <Pencil className="w-4 h-4 mr-2" />
+                Add Category
               </Button>
             </div>
           </div>

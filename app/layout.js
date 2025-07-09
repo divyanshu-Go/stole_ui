@@ -1,8 +1,9 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import ClientLayout from "@/components/ClientLayout"; // NEW
 import { Toaster } from "sonner";
+import { getCategory, getUserProfile } from "@/lib/api";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,18 +15,14 @@ export const metadata = {
   description: "Discover and share beautiful CSS components",
 };
 
-
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const user = await getUserProfile();
+  const categories = await getCategory();
   return (
     <html lang="en">
-      <body className={`font-[Poppins] relative min-h-screen flex flex-col `}>
-        
-        <Header />
-        <main className="mt-16 mx-auto px-5 py-16 container flex flex-col flex-1">{children}</main>
-        <Footer />
-
+      <body className={`font-[Poppins] relative min-h-screen flex flex-col`}>
+        <ClientLayout categories={categories} user={user}>{children}</ClientLayout>
         <Toaster position="top-right" richColors />
-        
       </body>
     </html>
   );

@@ -58,7 +58,6 @@ const StatsSection = () => {
         </p>
       </div>
 
-      <div className="h-52 w-full bg-[var(--background)] absolute -bottom-20 blur-2xl"></div>
     </div>
   );
 };
