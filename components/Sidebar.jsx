@@ -78,7 +78,9 @@ export default function Sidebar({ user, categories, open, setOpen, toggleRef }) 
       </div>
 
       {/* Bottom - Actions & Logout */}
+
       <div className="p-4 flex items-center gap-4 border-t border-zinc-800">
+        {user &&
         <Button
           className="flex-grow bg-red-600 hover:bg-red-700 text-white"
           variant="destructive"
@@ -86,7 +88,7 @@ export default function Sidebar({ user, categories, open, setOpen, toggleRef }) 
         >
           <Icons.LogOut className="w-4 h-4 mr-2" />
           Logout
-        </Button>
+        </Button>}
         <CreateAndProfile user={user} />
       </div>
     </aside>
