@@ -1,24 +1,19 @@
 import { notFound } from "next/navigation";
-import { getApprovedElements } from "@/lib/api";
+import { getApprovedElements, getCategory, getUserProfile } from "@/lib/api";
 import ElementCard from "@/app/elements/components/ElementCard";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
-const CATEGORIES = [
-  "Button",
-  "Card",
-  "Loader",
-  "Switch",
-  "Form",
-  "Pattern",
-  "Other",
-];
 
 export default async function CategoryPage({ params }) {
+  const categories = await getCategory();
+  const categoryNames = categories.map((cat)=>cat.name);
   const categoryParam = params.category;
   const Category = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
+  const user= await getUserProfile();
+
 
   // Invalid category fallback
-  if (!CATEGORIES.includes(Category)) {
+  if (!categoryNames.includes(Category)) {
     notFound(); // shows 404
   }
 
@@ -69,7 +64,7 @@ export default async function CategoryPage({ params }) {
               className="opacity-0 animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <ElementCard element={element} />
+              <ElementCard user={user} element={element} />
             </div>
           ))}
         </div>

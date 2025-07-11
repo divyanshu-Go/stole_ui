@@ -24,7 +24,7 @@ export async function POST(req) {
     const data = await req.json();
 
     // Validate required fields
-    const { title, description, htmlCode, cssCode, category, tags, likes} = data;
+    const { title, description, htmlCode, cssCode, zoom, category, tags, likes} = data;
 
     if (
       !htmlCode ||
@@ -47,6 +47,7 @@ export async function POST(req) {
       description,
       htmlCode,
       cssCode,
+      zoom,
       category,
       authorId: payload.user._id,
       status: "pending", // Default status
@@ -81,26 +82,18 @@ export async function GET(request) {
     // Ensure database connection
     await DbConnect();
 
-    // Parse query parameters
+     // Parse relevant query parameters (only category and authorId are kept)
     const { searchParams } = new URL(request.url);
-    const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "10");
     const category = searchParams.get('category');
-    const status = searchParams.get("status");
-    const authorId = searchParams.get("authorId");
-    const search = searchParams.get('search');
+    const authorId = searchParams.get('authorId');
 
-
-    // Build query object
+    // Build query object based on remaining relevant parameters
     let query = {};
-    if (category) query.category = category;
-    if (authorId) query.authorId = authorId;
-    if (search) {
-      query.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-        { tags: { $in: [new RegExp(search, 'i')] } },
-      ];
+    if (category) {
+      query.category = category;
+    }
+    if (authorId) {
+      query.authorId = authorId;
     }
 
     // Fetch components with populated creator information

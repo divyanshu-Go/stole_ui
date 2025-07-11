@@ -44,8 +44,13 @@ const ElementSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Button", "Card", "Loader", "Switch", "Form", "Pattern", "Other"],
       default: "Other",
+    },
+    zoom: {
+        type: Number,
+        default: 1.0,
+        min: 0.1,
+        max: 5,
     },
     authorId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -98,34 +103,3 @@ export default mongoose.models.Element ||
   mongoose.model("Element", ElementSchema);
 
 
-
-
- 
-  // comments: [
-  //   {
-  //     user: {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: "User",
-  //       required: true,
-  //     },
-  //     text: {
-  //       type: String,
-  //       required: true,
-  //       trim: true,
-  //     },
-  //     createdAt: {
-  //       type: Date,
-  //       default: Date.now,
-  //     },
-  //   },
-  // ],
-
-
-  
-// ElementSchema.virtual("savesCount").get(function () {
-//   return this.saves?.length || 0;
-// });
-
-// ElementSchema.virtual("commentsCount").get(function () {
-//   return this.comments?.length || 0;
-// });
