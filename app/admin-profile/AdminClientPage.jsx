@@ -53,7 +53,7 @@ export default function AdminClientPage({ user, elements: initialElements }) {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="mx-auto max-w-7xl w-full">
       {/* Top Dashboard */}
       <ProfileDashboard user={user} handleLogout={handleLogout} />
 

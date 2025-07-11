@@ -48,14 +48,7 @@ const ElementsTable = ({
         <CardDescription className="card-description">
           Manage your submitted elements
         </CardDescription>
-        {user?.role =='admin' &&
-        <button
-          onClick={() => router.push(`/admin-profile`)}
-          className="border text-sm absolute right-6 top-4 p-2 flex rounded items-center border-indigo-500 text-indigo-300 hover:bg-indigo-700 hover:text-white"
-        >
-          <Folders className="w-5 h-4 mr-2" />
-          Manage All Submittions
-        </button>}
+
       </CardHeader>
       <CardContent>
         {elements.length === 0 ? (
