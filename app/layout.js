@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
   const categories = await getCategory();
   return (
     <html lang="en">
-      <body className={`font-[Poppins] relative min-h-screen flex flex-col`}>
+      <body className={`font-[Poppins] relative min-h-screen flex flex-col overflow-x-hidden`}>
         <ClientLayout categories={categories} user={user}>{children}</ClientLayout>
         <Toaster position="top-right" richColors />
       </body>

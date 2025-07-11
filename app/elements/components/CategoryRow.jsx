@@ -2,7 +2,7 @@ import Link from "next/link";
 import ElementCard from "./ElementCard";
 import { ArrowRight } from "lucide-react";
 
-const CategoryRow = ({ category, elements }) => {
+const CategoryRow = ({user, category, elements }) => {
   const displayElements = elements.slice(0, 4);
 
   return (
@@ -31,7 +31,7 @@ const CategoryRow = ({ category, elements }) => {
               className="opacity-0 animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <ElementCard element={element} />
+              <ElementCard user={user} element={element} />
             </div>
           ))}
         </div>

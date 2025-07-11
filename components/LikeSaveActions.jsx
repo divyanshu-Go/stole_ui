@@ -3,11 +3,9 @@ import { useState } from "react";
 import LikeButton from "./SocialButtons/LikeButton";
 import SaveButton from "./SocialButtons/SaveButton";
 import { toast } from "sonner";
-import { useProfile } from "@/hooks/useProfile";
 import { Bookmark, Heart, Link as LinkIcon, Check, Share2, MessageSquare } from "lucide-react";
 
-export default function LikeSaveActions({ element }) {
-  const { user } = useProfile();
+export default function LikeSaveActions({ element, user }) {
   const [copied, setCopied] = useState(false);
 
   if (!element) return null;

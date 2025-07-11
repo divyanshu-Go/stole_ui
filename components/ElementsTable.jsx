@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Edit, Pencil, Trash2 } from "lucide-react";
+import { Edit, Folders, Pencil, Trash2 } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -11,12 +11,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 const ElementsTable = ({
+  user,
   elements,
   router,
   setElementToDelete,
   setDeleteDialogOpen,
 }) => {
- 
+
   const getStatusColor = (status) => {
     switch (status) {
       case "approved":
@@ -37,16 +38,24 @@ const ElementsTable = ({
         return "hover:bg-yellow-600";
     }
   };
-  
+
 
 
   return (
     <Card className="card">
-      <CardHeader>
+      <CardHeader className="relative">
         <CardTitle className="card-title">Your Contributions</CardTitle>
         <CardDescription className="card-description">
           Manage your submitted elements
         </CardDescription>
+        {user?.role =='admin' &&
+        <button
+          onClick={() => router.push(`/admin-profile`)}
+          className="border text-sm absolute right-6 top-4 p-2 flex rounded items-center border-indigo-500 text-indigo-300 hover:bg-indigo-700 hover:text-white"
+        >
+          <Folders className="w-5 h-4 mr-2" />
+          Manage All Submittions
+        </button>}
       </CardHeader>
       <CardContent>
         {elements.length === 0 ? (
@@ -55,12 +64,12 @@ const ElementsTable = ({
               No eLements submitted yet !
             </div>
             <Button
-                className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                onClick={() => router.push("/add-component")}
-              >
-                <Pencil className="w-4 h-4 mr-2" />
-                Create Now
-              </Button>
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+              onClick={() => router.push("/add-component")}
+            >
+              <Pencil className="w-4 h-4 mr-2" />
+              Create Now
+            </Button>
           </div>
         ) : (
           <div className="overflow-x-auto  py-4 text-base max-[600px]:text-[95%]">

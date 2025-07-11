@@ -4,17 +4,21 @@ import HamburgerIcon from "./HambergerIcon";
 import { Plus, User2 } from "lucide-react";
 import Tooltip from "./Tooltip";
 import { useRef } from "react";
+import CreateAndProfile from "./CreateAndProfile";
 
-export default function Header({ user, open, setOpen , toggleRef}) {
+export default function Header({ user, open, setOpen, toggleRef }) {
   const pathname = usePathname();
 
   const navLinks = [
     { name: "Elements", href: "/elements" },
-    { name: "Challenges", href: "/challenges" },
+    { name: "Home", href: "/" },
     { name: "About Us", href: "/about" }
   ];
 
-  const isActive = (href) => pathname.startsWith(href);
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <header className="flex w-full fixed z-50 gap-1 px-1 pt-1 ">
@@ -26,14 +30,14 @@ export default function Header({ user, open, setOpen , toggleRef}) {
       {/* Navigation-bar */}
       <div className="  flex flex-grow items-center justify-between px-3 blurred-bg bg-[var(--secondary-bg)] text-[var(--secondary-fg)] rounded" >
         <Link href="/" className="flex items-center space-x-2">
-          <span className="flex items-center gap-3 text-[var(--foreground)] font-bold text-lg tracking-wider">
+          <span className="flex items-center gap-3 text-nowrap text-[var(--foreground)] font-bold text-lg tracking-wider">
             <img src="Stole-Ui.png" alt="logo" width={26} />
             Stole UI
           </span>
         </Link>
 
 
-        <nav className=" hidden md:flex items-center gap-2 ">
+        <nav className=" hidden sm:flex items-center gap-2 text-nowrap">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -49,26 +53,7 @@ export default function Header({ user, open, setOpen , toggleRef}) {
         </nav>
 
         {/* Actions */}
-        <div className="gap-4 flex">
-
-          {/* ➕ Plus icon */}
-          <div className="flex items-center nav-btn">
-            <Tooltip text={!user ? "Login to contribute" : ""}>
-              <Link href="/add-component">
-                <Plus className="h-4" />
-              </Link>
-            </Tooltip>
-          </div>
-
-          {/* 👤 User2 icon */}
-          <div className="flex items-center nav-btn">
-            <Tooltip text={user ? "Profile" : "Login"}>
-              <Link href={user ? (user.role === 'admin' ? '/admin-profile' : '/profile') : '/login'}>
-                <User2 className="h-4" />
-              </Link>
-            </Tooltip>
-          </div>
-        </div>
+        <CreateAndProfile user={user} />
 
       </div>
     </header>

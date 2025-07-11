@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Button from "./Button";
 
 export default function CategoryForm() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ export default function CategoryForm() {
       [e.target.name]: e.target.value,
     }));
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +51,7 @@ export default function CategoryForm() {
       onSubmit={handleSubmit}
       className="mx-auto my-16 max-w-[800px] w-full p-6 rounded-xl border border-border bg-white/5 backdrop-blur text-white space-y-4"
     >
-      <h2 className="text-xl font-semibold text-violet-400">Create New Category</h2>
+      <h2 className="text-xl font-semibold text-indigo-400">Create New Category</h2>
 
       <div>
         <label htmlFor="name" className="block text-sm mb-1">
@@ -114,14 +116,12 @@ export default function CategoryForm() {
         <p className="text-xs text-zinc-400 mt-1">This is the link where the category points to.</p>
       </div>
 
-      <button
+      <Button
         type="submit"
-        disabled={loading}
-        className="w-full bg-violet-600 hover:bg-violet-700 transition text-white font-medium py-2 rounded-md"
-      >
-        {loading ? "Creating..." : "Create Category"}
-      </button>
-
+        isLoading={loading}
+        loadingText="Creating..."
+        text="Create Category"
+      />
       {message && (
         <p className="text-sm text-center mt-2 text-violet-300">{message}</p>
       )}

@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { User, LogOut, Edit, Pencil } from "lucide-react";
+import { User, LogOut, Edit, Pencil, Folders } from "lucide-react";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ const ProfileDashboard = ({ user, handleLogout }) => {
         <CardDescription className="card-description">
           Manage your profile and settings
         </CardDescription>
+        
       </CardHeader>
       <CardContent>
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 py-4">

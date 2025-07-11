@@ -36,6 +36,7 @@ export default function ClientProfilePage({ user, elements: initialElements }) {
     <div className="mx-auto max-w-7xl w-full">
       <ProfileDashboard user={user} handleLogout={handleLogout} />
       <ElementsTable
+        user={user}
         elements={elements}
         router={router}
         setElementToDelete={setElementToDelete}

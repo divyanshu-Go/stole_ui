@@ -181,6 +181,10 @@ body {
   text-shadow: 15px 15px 60px #ff00ae69, -10px -10px 60px #0066ff5c;
 }
 
+.box-shadow {
+  box-shadow: -10px -20px 100px rgba(93, 0, 255, 0.1), -20px -10px 100px rgba(0, 102, 255, 0.08);
+}
+
 .blurred-bg {
    background: rgba(34, 34, 34, 0.86); /*Semi-transparent background */
   backdrop-filter: blur(6px); /*Applies the blur effect */
@@ -306,7 +310,7 @@ a:hover {
 }
 
 #nav-icon3 span {
-  @apply absolute h-[3.5px] w-[25px] bg-[var(--button-bg)] rounded opacity-100 left-[10px] top-[13px] rotate-0 transition-all duration-200 ease-in-out;
+  @apply absolute h-[3.5px] w-[25px] bg-[var(--button-bg)] rounded opacity-100 left-[10px] top-[13px] rotate-0 transition-all duration-150 ease-in-out;
 }
 
 
@@ -354,5 +358,72 @@ a:hover {
 }
 
 
+/* Featured Section */
+@keyframes scroll-left-right {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-1000px); /* adjust as needed */
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+@keyframes scroll-right-left {
+  0% {
+    transform: translateX(-1000px);
+  }
+  50% {
+    transform: translateX(0); /* adjust as needed */
+  }
+  100%{
+    transform: translateX(-1000px);
+  }
+}
+
+@layer utilities {
+  .animate-scroll-left-right {
+    animation: scroll-left-right 90s ease-in-out infinite;
+  }
+}
+@layer utilities {
+  .animate-scroll-right-left {
+    animation: scroll-right-left 90s ease-in-out infinite;
+  }
+}
 
 
+
+
+/* Create button animation */
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-glow-button {
+  background: linear-gradient(270deg, #ff00c8, #00dbde, #ff9900, #ff00c8);
+  background-size: 600% 300%;
+  animation: gradient-move 8s ease infinite;
+  box-shadow: 0 0 10px rgba(255, 0, 200, 0.3), 0 0 20px rgba(0, 219, 222, 0.2);
+  border-radius: 0.25rem;
+  height:2rem;
+  width:2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.gradient-glow-button:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(255, 0, 200, 0.4), 0 0 25px rgba(0, 219, 222, 0.3);
+}

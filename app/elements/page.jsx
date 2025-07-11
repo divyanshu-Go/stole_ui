@@ -1,15 +1,16 @@
 // ✅ This is now a Server Component
 import CategoryRow from "./components/CategoryRow";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getApprovedElements } from "@/lib/api";
+import { getApprovedElements, getCategory, getUserProfile } from "@/lib/api";
 
-// Element categories to group by
-const CATEGORIES = ["Button", "Card", "Loader", "Switch", "Form", "Pattern", "Other"];
 
 export default async function ElementsPage() {
   const elements = await getApprovedElements();
+  const user = await getUserProfile();
+    const categories = await getCategory();
+    const categoryNames = categories.map((cat)=>cat.name);
 
-  const elementsByCategory = CATEGORIES.reduce((acc, category) => {
+  const elementsByCategory = categoryNames.reduce((acc, category) => {
     acc[category] = elements.filter((el) => el.category === category);
     return acc;
   }, {});
@@ -28,9 +29,10 @@ export default async function ElementsPage() {
           </CardDescription>
         </CardHeader>
 
-        {CATEGORIES.map((category) => (
+        {categoryNames.map((category) => (
           <CategoryRow
             key={category}
+            user={user}
             category={category}
             elements={elementsByCategory[category] || []}
           />

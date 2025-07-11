@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Eye, Trash2 } from "lucide-react";
+import { Eye, Folders, Trash2 } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import PopoverMenu from "./PopoverMenu"; // Make sure this path is correct
+import Link from "next/link";
 
 const AdminElementsTable = ({
   elements,
@@ -43,11 +44,18 @@ const AdminElementsTable = ({
 
   return (
     <Card className="card">
-      <CardHeader>
+      <CardHeader className="relative">
         <CardTitle className="card-title">Element Submissions</CardTitle>
         <CardDescription className="card-description">
           Manage and review submitted elements
         </CardDescription>
+        <button 
+        onClick={()=> router.push(`/profile`)}
+        className="border text-sm absolute right-6 top-4 p-2 flex rounded items-center border-indigo-500 text-indigo-300 hover:bg-indigo-700 hover:text-white"
+        >
+        <Folders className="w-5 h-4 mr-2"/>
+          Your submittion
+        </button>
       </CardHeader>
       <CardContent>
         {elements.length === 0 ? (

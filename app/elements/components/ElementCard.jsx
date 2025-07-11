@@ -1,14 +1,11 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Code, Heart, Bookmark, MessageSquare } from "lucide-react";
 import LikeButton from "@/components/SocialButtons/LikeButton";
-import { useProfile } from "@/hooks/useProfile";
 import SaveButton from "@/components/SocialButtons/SaveButton";
 import { toast } from "sonner";
 
-const ElementCard = ({ element }) => {
+
+const ElementCard = ({ user, element }) => {
   const {
     _id,
     title,
@@ -17,35 +14,21 @@ const ElementCard = ({ element }) => {
     authorId,
     likes = [],
     saves = [],
-    comments = []
+    comments = [],
+    zoom = 1, // default zoom to 1
   } = element;
-
-
-
-  const { user } = useProfile();
-
-  const [fakeLiked, setFakeLiked] = useState(likes.length);
-
-  const handleFakeLikes = () => {
-    // Toggle between real count and fake count
-    setFakeLiked((prev) =>
-      prev === likes.length ? likes.length + 1 : likes.length
-    );
-  };
 
   return (
     <div
-      className="group  bg-zinc-900 rounded-xl overflow-hidden border-[3px] border-zinc-800 
+      className="group bg-zinc-900 rounded-xl overflow-hidden border-[3px] border-zinc-800 
     transition-all duration-100 hover:scale-[1.01] hover:rounded-2xl hover:border-zinc-700"
     >
-      <div className="relative aspect-video ">
+      <div className="relative aspect-video">
         <iframe
           srcDoc={`
             <html>
               <head>
                 <style>
-                  ${cssCode}
-                  /* Reset styles for preview */
                   body {
                     margin: 0;
                     display: grid;
@@ -55,9 +38,18 @@ const ElementCard = ({ element }) => {
                     color: #e4e4e7;
                     overflow: clip;
                   }
+                  .zoom-wrapper {
+                    transform: scale(${zoom});
+                    transform-origin: center;
+                  }
+                  ${cssCode}
                 </style>
               </head>
-              <body>${htmlCode}</body>
+              <body>
+                <div class="zoom-wrapper">
+                  ${htmlCode}
+                </div>
+              </body>
             </html>
           `}
           className="w-full h-full pointer-events-auto overflow-hidden"
@@ -76,7 +68,6 @@ const ElementCard = ({ element }) => {
         </Link>
       </div>
 
-      
       <div className="p-3 flex items-center justify-between border-t border-zinc-800">
         <p className="text-xs tracking-wider font-medium text-zinc-400 truncate">
           by{" "}
@@ -94,16 +85,14 @@ const ElementCard = ({ element }) => {
             />
           ) : (
             <button
-              onClick={handleFakeLikes}
-              className={`flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-red-400 transition-all duration-200 `}
-              
+              onClick={() =>
+                toast.info("You need to log in to like this component.")
+              }
+              type="button"
+              className="flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-red-400 transition-all duration-200"
             >
-              <Heart
-                size={16}
-                fill={fakeLiked > likes.length ? "#fa5050" : "none"}
-                className={fakeLiked > likes.length ? " text-red-400" : "text-zinc-400 hover:text-red-500"}
-              />
-              <span className="text-xs font-semibold">{fakeLiked}</span>
+              <Heart size={16} fill="none" />
+              <span className="text-xs font-semibold">{likes.length}</span>
             </button>
           )}
 
@@ -118,6 +107,7 @@ const ElementCard = ({ element }) => {
               onClick={() =>
                 toast.info("You need to log in to save this component.")
               }
+              type="button"
               className="flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-blue-400 transition-all duration-200"
             >
               <Bookmark size={16} fill="none" />
@@ -125,15 +115,18 @@ const ElementCard = ({ element }) => {
             </button>
           )}
 
-          <button className="flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-green-400 transition-all duration-200 ">
-             <MessageSquare size={16} />
+          <button
+            type="button"
+            className="flex items-center gap-2 py-1.5 px-3 rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-green-400 transition-all duration-200"
+          >
+            <MessageSquare size={16} />
             <span className="text-xs font-semibold">{comments.length}</span>
           </button>
         </div>
       </div>
-      
     </div>
   );
 };
+
 
 export default ElementCard;
