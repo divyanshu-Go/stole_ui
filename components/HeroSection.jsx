@@ -2,7 +2,7 @@ import React from 'react'
 
 const HeroSection = () => {
   return (
-    <section className=" w-full flex flex-col ">
+    <section className=" w-full flex flex-col">
       <video
         className="absolute top-0 left-0 w-full h-1/2 object-cover mix-blend-lighten -z-10"
         autoPlay

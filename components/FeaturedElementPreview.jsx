@@ -51,7 +51,7 @@ export default function ElementPreview({ element, index }) {
 
   return (
     <div
-      className="bg-[#1a1a1a] box-shadow  -rotate-0 hover:-rotate-3 hover:scale-105 rounded shadow-lg border-2 border-stone-800 flex justify-center transition-transform  duration-200 ease-in-out"
+      className="bg-[#1a1a1a] scale-[0.70] sm:scale-[0.80] md:scale-90  box-shadow  -rotate-0 hover:-rotate-3 hover:scale-105 rounded shadow-lg border-2 border-stone-800 flex justify-center transition-transform  duration-200 ease-in-out"
  
     >
       <div
