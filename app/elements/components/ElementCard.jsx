@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Code, Heart, Bookmark, MessageSquare } from "lucide-react";
 import LikeButton from "@/components/SocialButtons/LikeButton";
