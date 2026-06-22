@@ -1,3 +1,4 @@
+// components/Sidebar.jsx
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -56,7 +57,7 @@ export default function Sidebar({ user, categories, open, setOpen, toggleRef }) 
         <h2 className="text-xl font-semibold mb-4 text-gray-100">Elements</h2>
         <nav>
           <ul className="space-y-1">
-            {categories.map((category) => {
+            {(categories || []).map((category) => {
               const Icon = Icons[category.icon] || Icons.Square;
               return (
                 <li key={category.name}>
