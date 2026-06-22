@@ -1,6 +1,8 @@
+// app/add-component/ComponentSubmission.jsx
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import * as LucideIcons from "lucide-react";
 import EditorAndPreviewComponent from "@/components/EditorAndPreviewComponent";
 import Button from "@/components/Button";
@@ -8,6 +10,7 @@ import CategorySelector from "@/components/CategorySelector";
 import { toast } from "sonner";
 
 export default function ComponentSubmission({ categories }) {
+  const router = useRouter();
   const [element, setElement] = useState({
     htmlCode: '<button class="custom-button">\n  Click me\n</button>',
     cssCode:
@@ -39,6 +42,7 @@ export default function ComponentSubmission({ categories }) {
       if (!response.ok) throw new Error("Failed to submit component");
 
       toast.success("Submitted Successfully");
+      router.push("/profile");
     } catch (err) {
       setError(err.message);
     } finally {

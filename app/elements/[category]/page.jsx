@@ -1,3 +1,4 @@
+// app/elements/[category]/page.jsx
 import { notFound } from "next/navigation";
 import { getApprovedElements, getCategory, getUserProfile } from "@/lib/api";
 import ElementCard from "@/app/elements/components/ElementCard";
@@ -6,21 +7,22 @@ import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 export default async function CategoryPage({ params }) {
   const categories = await getCategory();
-  const categoryNames = categories.map((cat)=>cat.name);
   const categoryParam = params.category;
-  const Category = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
-  const user= await getUserProfile();
+  const category = categories.find(
+    (cat) => cat.href === categoryParam || cat.name.toLowerCase() === categoryParam
+  );
 
-
-  // Invalid category fallback
-  if (!categoryNames.includes(Category)) {
+  if (!category) {
     notFound(); // shows 404
   }
+
+  const categoryName = category.name;
+  const user = await getUserProfile();
 
   let approvedElements = [];
   try {
     const allApproved = await getApprovedElements();
-    approvedElements = allApproved.filter((el) => el.category === Category);
+    approvedElements = allApproved.filter((el) => el.category === categoryName);
   } catch (err) {
     console.error("Fetch error:", err);
     return (
@@ -35,10 +37,10 @@ export default async function CategoryPage({ params }) {
       <div className="min-h-screen bg-zinc-900 text-white">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-white mb-8 capitalize">
-            {Category} Elements
+            {categoryName} Elements
           </h1>
           <p className="text-zinc-400 text-center mt-4">
-            🚫 No {Category} elements found. Check back later!
+            🚫 No {categoryName} elements found. Check back later!
           </p>
         </div>
       </div>
@@ -50,10 +52,10 @@ export default async function CategoryPage({ params }) {
       <div className="container mx-auto space-y-4 py-8">
         <CardHeader>
           <CardTitle className="text-4xl m-0 text-slate-300 font-bold capitalize">
-            {Category} Elements
+            {categoryName} Elements
           </CardTitle>
           <CardDescription className="card-text-xl m-0 text-slate-400">
-            Open-Source UI {Category} elements made with CSS
+            Open-Source UI {categoryName} elements made with CSS
           </CardDescription>
         </CardHeader>
 

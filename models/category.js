@@ -1,4 +1,4 @@
-// models/Category.js
+// models/category.js
 import mongoose from "mongoose";
 
 const categorySchema = new mongoose.Schema(

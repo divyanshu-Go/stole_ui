@@ -1,3 +1,5 @@
+// components/CategoryForm.jsx
+
 "use client";
 
 import { useState } from "react";
