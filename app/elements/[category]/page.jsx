@@ -1,12 +1,14 @@
 // app/elements/[category]/page.jsx
 import { notFound } from "next/navigation";
-import { getApprovedElements, getCategory, getUserProfile } from "@/lib/api";
+import { getCategoriesFromDB } from "@/lib/server/category";
+import { getApprovedElementsByCategoryFromDB } from "@/lib/server/element";
+import { getCurrentUserFromDB } from "@/lib/server/user";
 import ElementCard from "@/app/elements/components/ElementCard";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 
 export default async function CategoryPage({ params }) {
-  const categories = await getCategory();
+  const categories = await getCategoriesFromDB();
   const categoryParam = params.category;
   const category = categories.find(
     (cat) => cat.href === categoryParam || cat.name.toLowerCase() === categoryParam
@@ -17,12 +19,12 @@ export default async function CategoryPage({ params }) {
   }
 
   const categoryName = category.name;
-  const user = await getUserProfile();
-
-  let approvedElements = [];
+  const [user, approvedElements] = await Promise.all([
+    getCurrentUserFromDB(),
+    getApprovedElementsByCategoryFromDB(categoryName),
+  ]);
   try {
-    const allApproved = await getApprovedElements();
-    approvedElements = allApproved.filter((el) => el.category === categoryName);
+    // approvedElements is now fetched directly from DB filtered by category
   } catch (err) {
     console.error("Fetch error:", err);
     return (
