@@ -35,7 +35,7 @@ const AboutPage = () => {
       <h2 className="text-2xl font-semibold text-white">About the Developer</h2>
 
       <p>
-        Hi! I’m <strong>Divyanshu Sharma</strong>, a passionate developer who loves building tools that help other developers. I created Stole UI to make it easier for people like me to access well-designed, production-ready components without needing to browse through endless design sites or rebuild the same things repeatedly.
+        Hi! I’m <strong>Sanjeev Kumar Jha</strong>, a passionate developer who loves building tools that help other developers. I created Stole UI to make it easier for people like me to access well-designed, production-ready components without needing to browse through endless design sites or rebuild the same things repeatedly.
       </p>
 
       <p>
