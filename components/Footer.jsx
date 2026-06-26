@@ -55,7 +55,7 @@ const Footer = () => {
               className="flex items-center justify-center gap-2 text-[var(--secondary-fg)] hover:text-[var(--foreground)] transition-colors"
             >
               <Mail className="h-4 w-4" />
-              <span>divyanshu930462gmail.com.com</span>
+              <span>sanjeev930gmail.com</span>
             </Link>
             
             {/* Social Links */}
@@ -92,7 +92,7 @@ const Footer = () => {
       {/* Copyright */}
       <div className="w-full mt-8 pt-4 border-t border-gray-700/30 text-center">
         <p className="text-sm text-[var(--secondary-fg)]">
-          © {new Date().getFullYear()} Stole UI. Develpoed by Divyanshu Sharma.
+          © {new Date().getFullYear()} Stole UI. Developed by Sanjeev Kumar Jha.
         </p>
       </div>
     </footer>
