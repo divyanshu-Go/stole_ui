@@ -1,14 +1,15 @@
 // ✅ This is now a Server Component
 import CategoryRow from "./components/CategoryRow";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getApprovedElements, getCategory, getUserProfile } from "@/lib/api";
-
+import { getApprovedElementsFromDB } from "@/lib/server/element";
+import { getCategoriesFromDB } from "@/lib/server/category";
+import { getUserProfile } from "@/lib/api";
 
 export default async function ElementsPage() {
-  const elements = await getApprovedElements();
+  const elements = await getApprovedElementsFromDB();
   const user = await getUserProfile();
-    const categories = await getCategory();
-    const categoryNames = categories.map((cat)=>cat.name);
+  const categories = await getCategoriesFromDB();
+  const categoryNames = categories.map((cat) => cat.name);
 
   const elementsByCategory = categoryNames.reduce((acc, category) => {
     acc[category] = elements.filter((el) => el.category === category);
