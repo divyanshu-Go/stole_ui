@@ -1,24 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Eye, Plus, Minus } from "lucide-react";
 
 const ElementPreview = ({ element, setElement }) => {
-  const zoom = parseFloat(element.zoom) || 1;
+  const parsedZoom = Number(element?.zoom);
+  const zoom = Number.isFinite(parsedZoom) && element?.zoom != null
+    ? Math.min(Math.max(parsedZoom, 0.2), 2)
+    : 1;
 
+  const updateZoom = (change) => {
+    setElement((previousElement) => {
+      const previousZoom = Number(previousElement.zoom);
+      const currentZoom = Number.isFinite(previousZoom) && previousElement.zoom != null
+        ? Math.min(Math.max(previousZoom, 0.2), 2)
+        : 1;
 
-const handleZoomIn = () => {
-  const newZoom = Math.min(parseFloat(element.zoom) + 0.05, 2);
-  // Store the zoom value as a number
-  setElement((prev) => ({ ...prev, zoom: newZoom }));
-};
-
-const handleZoomOut = () => {
-  const newZoom = Math.max(parseFloat(element.zoom) - 0.05, 0.2);
-  // Store the zoom value as a number
-  setElement((prev) => ({ ...prev, zoom: newZoom }));
-};
-
-
+      return {
+        ...previousElement,
+        zoom: Math.min(Math.max(currentZoom + change, 0.2), 2),
+      };
+    });
+  };
 
   const srcDoc = `
     <!DOCTYPE html>
@@ -38,7 +40,7 @@ const handleZoomOut = () => {
             color: white;
           }
 
-          .zoom-wrapper {
+          .stole-ui-preview-zoom {
             transform: scale(${zoom});
             transform-origin: center center;
           }
@@ -47,7 +49,7 @@ const handleZoomOut = () => {
         </style>
       </head>
       <body>
-        <div class="zoom-wrapper">
+        <div class="stole-ui-preview-zoom">
           ${element.htmlCode}
         </div>
       </body>
@@ -87,8 +89,10 @@ const handleZoomOut = () => {
         <div className="mt-2 flex items-center gap-3 text-black font-medium pb-0.5">
           <button
             type="button" // ✅ prevent form submission
-            onClick={handleZoomOut}
-            className="px-2 py-1 rounded bg-zinc-300 text-black hover:bg-zinc-400 transition"
+            onClick={() => updateZoom(-0.05)}
+            disabled={zoom <= 0.2}
+            aria-label="Decrease preview size"
+            className="px-2 py-1 rounded bg-zinc-300 text-black hover:bg-zinc-400 disabled:opacity-50 disabled:cursor-not-allowed transition"
           >
             <Minus size={16} />
           </button>
@@ -96,8 +100,10 @@ const handleZoomOut = () => {
 
           <button
             type="button" // ✅ prevent form submission
-            onClick={handleZoomIn}
-            className="px-2 py-1 rounded bg-zinc-300 text-black hover:bg-zinc-400 transition"
+            onClick={() => updateZoom(0.05)}
+            disabled={zoom >= 2}
+            aria-label="Increase preview size"
+            className="px-2 py-1 rounded bg-zinc-300 text-black hover:bg-zinc-400 disabled:opacity-50 disabled:cursor-not-allowed transition"
           >
             <Plus size={16} />
           </button>
