@@ -4,6 +4,8 @@ import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import { getStatsFromDB } from "@/lib/server/stats";
 
+export const revalidate = 300;
+
 export default async function Home() {
   const { elementCount, userCount } = await getStatsFromDB();
 

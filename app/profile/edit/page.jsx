@@ -1,8 +1,12 @@
 import EditProfileClient from "./EditProfileClient";
-import { getUserProfile } from "@/lib/api";
+import { getCurrentUserFromDB } from "@/lib/server/user";
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 export default async function EditProfilePage() {
-  const user = await getUserProfile(); // ✅ server-side fetch
+  const user = await getCurrentUserFromDB();
+  if (!user) redirect("/login");
 
   return <EditProfileClient user={user} />;
 }

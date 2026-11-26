@@ -2,16 +2,26 @@
 import { notFound } from "next/navigation";
 import { getCategoriesFromDB } from "@/lib/server/category";
 import { getApprovedElementsByCategoryFromDB } from "@/lib/server/element";
-import { getCurrentUserFromDB } from "@/lib/server/user";
 import ElementCard from "@/app/elements/components/ElementCard";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const categories = await getCategoriesFromDB();
+  return categories.map((category) => ({
+    category: category.href.split("/").pop(),
+  }));
+}
 
 export default async function CategoryPage({ params }) {
+  const resolvedParams = await params;
   const categories = await getCategoriesFromDB();
-  const categoryParam = params.category;
+  const categoryParam = resolvedParams.category;
   const category = categories.find(
-    (cat) => cat.href === categoryParam || cat.name.toLowerCase() === categoryParam
+    (cat) =>
+      cat.href.split("/").pop() === categoryParam ||
+      cat.name.toLowerCase() === categoryParam
   );
 
   if (!category) {
@@ -19,20 +29,7 @@ export default async function CategoryPage({ params }) {
   }
 
   const categoryName = category.name;
-  const [user, approvedElements] = await Promise.all([
-    getCurrentUserFromDB(),
-    getApprovedElementsByCategoryFromDB(categoryName),
-  ]);
-  try {
-    // approvedElements is now fetched directly from DB filtered by category
-  } catch (err) {
-    console.error("Fetch error:", err);
-    return (
-      <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
-        <div className="text-red-400">Failed to load elements for this category.</div>
-      </div>
-    );
-  }
+  const approvedElements = await getApprovedElementsByCategoryFromDB(categoryName);
 
   if (approvedElements.length === 0) {
     return (
@@ -68,7 +65,7 @@ export default async function CategoryPage({ params }) {
               className="opacity-0 animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <ElementCard user={user} element={element} />
+              <ElementCard element={element} />
             </div>
           ))}
         </div>

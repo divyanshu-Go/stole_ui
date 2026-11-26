@@ -1,16 +1,25 @@
 import React from "react";
-import { getElementById, getUserProfile } from "@/lib/api";
+import { getElementByIdFromDB } from "@/lib/server/element";
+import { getApprovedElementsFromDB } from "@/lib/server/element";
 import ClientElementViewer from "./ClientElementViewer";
 
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const elements = await getApprovedElementsFromDB();
+  return elements.map((element) => ({
+    id: element._id,
+  }));
+}
+
 export default async function ElementPage({ params }) {
-  const elementId = params.id;
+  const resolvedParams = await params;
+  const elementId = resolvedParams.id;
 
   let element;
-  let user;
 
   try {
-    element = await getElementById(elementId);
-    user = await getUserProfile();
+    element = await getElementByIdFromDB(elementId);
   } catch (error) {
     return (
       <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
@@ -27,5 +36,5 @@ export default async function ElementPage({ params }) {
     );
   }
 
-  return <ClientElementViewer element={element} user={user} />;
+  return <ClientElementViewer element={element} user={null} />;
 }

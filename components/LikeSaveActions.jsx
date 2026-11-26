@@ -4,8 +4,10 @@ import LikeButton from "./SocialButtons/LikeButton";
 import SaveButton from "./SocialButtons/SaveButton";
 import { toast } from "sonner";
 import { Bookmark, Heart, Link as LinkIcon, Check, Share2, MessageSquare } from "lucide-react";
+import { useAuthUser } from "@/components/AuthUserProvider";
 
-export default function LikeSaveActions({ element, user }) {
+export default function LikeSaveActions({ element }) {
+  const { user } = useAuthUser();
   const [copied, setCopied] = useState(false);
 
   if (!element) return null;

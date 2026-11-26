@@ -4,8 +4,10 @@
 import Link from "next/link";
 import { Plus, User2 } from "lucide-react";
 import Tooltip from "./Tooltip";
+import { useAuthUser } from "./AuthUserProvider";
 
-export default function CreateAndProfile({ user }) {
+export default function CreateAndProfile() {
+  const { user } = useAuthUser();
   return (
     <div className="gap-4 flex">
       {/* ➕ Plus icon */}

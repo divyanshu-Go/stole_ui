@@ -8,8 +8,10 @@ import * as Icons from "lucide-react";
 import CreateAndProfile from "./CreateAndProfile";
 import { Button } from "./ui/button";
 import axios from "axios";
+import { useAuthUser } from "./AuthUserProvider";
 
-export default function Sidebar({ user, categories, open, setOpen, toggleRef }) {
+export default function Sidebar({ categories, open, setOpen, toggleRef }) {
+  const { user, refreshUser } = useAuthUser();
   const pathname = usePathname();
   const sidebarRef = useRef();
 
@@ -37,6 +39,7 @@ export default function Sidebar({ user, categories, open, setOpen, toggleRef }) 
   const handleLogout = async () => {
     try {
       await axios.post("/api/auth/logout");
+      await refreshUser();
       window.location.href = "/";
     } catch (error) {
       console.error("Logout error:", error);
@@ -44,7 +47,7 @@ export default function Sidebar({ user, categories, open, setOpen, toggleRef }) 
   };
 
 
-  const isActive = (href) => pathname === `/${href}`;
+  const isActive = (href) => pathname === `/elements/${href.split("/").pop()}`;
 
   return (
 
@@ -62,7 +65,7 @@ export default function Sidebar({ user, categories, open, setOpen, toggleRef }) 
               return (
                 <li key={category.name}>
                   <Link
-                    href={`/${category.href}`}
+                    href={`/elements/${category.href.split("/").pop()}`}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${isActive(category.href)
                       ? "bg-violet-600 text-white shadow-sm"
                       : "text-gray-300 hover:bg-gray-800 hover:text-violet-400"
@@ -90,7 +93,7 @@ export default function Sidebar({ user, categories, open, setOpen, toggleRef }) 
           <Icons.LogOut className="w-4 h-4 mr-2" />
           Logout
         </Button>}
-        <CreateAndProfile user={user} />
+        <CreateAndProfile />
       </div>
     </aside>
   );

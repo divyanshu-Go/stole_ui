@@ -2,6 +2,7 @@
 
 import { doLogin } from "@/app/actions";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
 
@@ -10,7 +11,7 @@ export default function Navbar() {
     <header className="px-5 py-3 bg-gray-400 shadow-sm">
       <nav className="flex justify-between items-center">
         <Link href="/">
-          <img alt="" />
+          <Image src="/Stole-Ui.png" alt="Stole UI logo" width={24} height={24} />
         </Link>
 
         <div className="flex items-center gap-5">

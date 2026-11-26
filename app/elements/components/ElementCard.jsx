@@ -5,9 +5,11 @@ import { Code, Heart, Bookmark, MessageSquare } from "lucide-react";
 import LikeButton from "@/components/SocialButtons/LikeButton";
 import SaveButton from "@/components/SocialButtons/SaveButton";
 import { toast } from "sonner";
+import { useAuthUser } from "@/components/AuthUserProvider";
 
 
-const ElementCard = ({ user, element }) => {
+const ElementCard = ({ element }) => {
+  const { user } = useAuthUser();
   const {
     _id,
     title,

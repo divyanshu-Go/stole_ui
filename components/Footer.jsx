@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Twitter, Github, Mail, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
         {/* About Section */}
         <div className="text-center flex flex-col items-center flex-1">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <img src="Stole-Ui.png" alt="logo" width={22} />
+            <Image src="/Stole-Ui.png" alt="Stole UI logo" width={22} height={22} />
             <h3 className="font-bold text-[var(--foreground)]">Stole UI</h3>
           </div>
           <p className="text-sm text-[var(--secondary-fg)] max-w-xs">

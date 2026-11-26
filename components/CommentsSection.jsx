@@ -6,8 +6,10 @@ import { toast } from "sonner";
 import { Trash, Trash2 } from "lucide-react";
 import LoadingScreen from "./LoadingScreen";
 import { format } from "date-fns";
+import { useAuthUser } from "@/components/AuthUserProvider";
 
-export default function CommentsSection({ elementId, user }) {
+export default function CommentsSection({ elementId }) {
+  const { user } = useAuthUser();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [loading, setLoading] = useState(true);

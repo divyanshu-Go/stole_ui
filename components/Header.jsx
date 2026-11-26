@@ -8,8 +8,9 @@ import { Plus, User2 } from "lucide-react";
 import Tooltip from "./Tooltip";
 import { useRef } from "react";
 import CreateAndProfile from "./CreateAndProfile";
+import Image from "next/image";
 
-export default function Header({ user, open, setOpen, toggleRef }) {
+export default function Header({ open, setOpen, toggleRef }) {
   const pathname = usePathname();
 
   const navLinks = [
@@ -34,7 +35,7 @@ export default function Header({ user, open, setOpen, toggleRef }) {
       <div className="  flex flex-grow items-center justify-between px-3 blurred-bg bg-[var(--secondary-bg)] text-[var(--secondary-fg)] rounded" >
         <Link href="/" className="flex items-center space-x-2">
           <span className="flex items-center gap-3 text-nowrap text-[var(--foreground)] font-bold text-lg tracking-wider">
-            <img src="Stole-Ui.png" alt="logo" width={26} />
+            <Image src="/Stole-Ui.png" alt="Stole UI logo" width={26} height={26} />
             Stole UI
           </span>
         </Link>
@@ -56,7 +57,7 @@ export default function Header({ user, open, setOpen, toggleRef }) {
         </nav>
 
         {/* Actions */}
-        <CreateAndProfile user={user} />
+        <CreateAndProfile />
 
       </div>
     </header>

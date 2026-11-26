@@ -3,11 +3,10 @@ import CategoryRow from "./components/CategoryRow";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getApprovedElementsFromDB } from "@/lib/server/element";
 import { getCategoriesFromDB } from "@/lib/server/category";
-import { getUserProfile } from "@/lib/api";
+export const revalidate = 300;
 
 export default async function ElementsPage() {
   const elements = await getApprovedElementsFromDB();
-  const user = await getUserProfile();
   const categories = await getCategoriesFromDB();
   const categoryNames = categories.map((cat) => cat.name);
 
@@ -33,7 +32,6 @@ export default async function ElementsPage() {
         {categoryNames.map((category) => (
           <CategoryRow
             key={category}
-            user={user}
             category={category}
             elements={elementsByCategory[category] || []}
           />

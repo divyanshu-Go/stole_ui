@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/lib/auth/token";
-import { getUser } from "./lib/auth/getUser";
 
 export async function middleware(request) {
   const protectedPaths = ["/add-component", "/profile", "/admin-profile"];

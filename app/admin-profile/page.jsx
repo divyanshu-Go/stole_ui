@@ -1,9 +1,15 @@
-import { getUserProfile, getAllElements } from "@/lib/api";
+import { getCurrentUserFromDB } from "@/lib/server/user";
+import { getAllElementsFromDB } from "@/lib/server/element";
+import { redirect } from "next/navigation";
 import AdminClientPage from "./AdminClientPage";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminProfilePage() {
-  const user = await getUserProfile();
-  const allElements = await getAllElements();
+  const user = await getCurrentUserFromDB();
+  if (!user) redirect("/login");
+  if (user.role !== "admin") redirect("/unauthorized");
+  const allElements = await getAllElementsFromDB();
 
   // Filter and sort elements (pending/rejected/approved only)
   const filtered = allElements.filter(

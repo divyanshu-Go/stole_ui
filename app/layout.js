@@ -5,7 +5,6 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import ClientLayout from "@/components/ClientLayout";
 import { Toaster } from "sonner";
-import { getCurrentUserFromDB } from "@/lib/server/user";
 import { getCategoriesFromDB } from "@/lib/server/category";
 
 const poppins = Poppins({
@@ -19,16 +18,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  // Fetch user and categories on server side
-  const [user, categories] = await Promise.all([
-    getCurrentUserFromDB(),
-    getCategoriesFromDB(),
-  ]);
+  const categories = await getCategoriesFromDB();
 
   return (
     <html lang="en">
       <body className={`font-[Poppins] relative min-h-screen w-screen flex flex-col  overflow-x-hidden`}>
-        <ClientLayout user={user} categories={categories}>
+        <ClientLayout categories={categories}>
           {children}
         </ClientLayout>
         <Toaster position="top-right" richColors />

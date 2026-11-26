@@ -1,10 +1,10 @@
 import React from 'react'
 import FeaturedElementPreview from './FeaturedElementPreview'
-import { getTopLikedElements } from '@/lib/api';
+import { getTopLikedElementsFromDB } from '@/lib/server/element';
 
 const FeaturedElements = async () => {
 
-  const sampleElements = await getTopLikedElements();
+  const sampleElements = await getTopLikedElementsFromDB(10);
 
 
 
