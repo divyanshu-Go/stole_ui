@@ -18,8 +18,8 @@ const UpdateDialog = ({
         <p className="text-sm text-gray-400 mt-2">
           Are you sure you want to update the status of 
           <span className="text-white font-semibold"> {statusUpdateInfo?.elementCategory} </span> 
-           from <span className="font-semibold text-yellow-400">"{statusUpdateInfo?.currentStatus}" </span> 
-          to <span className="font-semibold text-green-400">"{statusUpdateInfo?.newStatus}" </span>?
+           from <span className="font-semibold text-yellow-400">&quot;{statusUpdateInfo?.currentStatus}&quot; </span> 
+          to <span className="font-semibold text-green-400">&quot;{statusUpdateInfo?.newStatus}&quot; </span>?
         </p>
 
         {/* Buttons */}

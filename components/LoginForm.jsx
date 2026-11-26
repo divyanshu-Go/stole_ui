@@ -144,7 +144,7 @@ export const LoginForm = () => {
 
         <AuthButton isLoading={isLoading}>Log In</AuthButton>
         <p className="text-center text-sm font-normal text-[var(--secondary-fg)]">
-          Don't have an account ? Please {' '}
+          Don&apos;t have an account ? Please {' '}
           <Link
             href="/signup"
             className="text-[var(--accent-color)] hover:underline"

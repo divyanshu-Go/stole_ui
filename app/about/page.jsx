@@ -9,19 +9,19 @@ const AboutPage = () => {
       <h1 className="text-4xl font-bold text-white">About Stole UI</h1>
 
       <p>
-        <strong>Stole UI</strong> is an open-source, minimalistic component library built for modern developers who love clean design and dark mode aesthetics. Whether you're building a dashboard, a landing page, or a creative portfolio, Stole UI provides you with flexible and beautifully crafted UI elements that help you move fast without compromising on quality.
+        <strong>Stole UI</strong> is an open-source, minimalistic component library built for modern developers who love clean design and dark mode aesthetics. Whether you&apos;re building a dashboard, a landing page, or a creative portfolio, Stole UI provides you with flexible and beautifully crafted UI elements that help you move fast without compromising on quality.
       </p>
 
       <p>
-        The goal of Stole UI is to " bridge the gap between design and development ". Instead of starting from scratch every time, you can explore, reuse, and remix elements to speed up your workflow. Every component is built using modern technologies like Next.js, Tailwind CSS, and designed with accessibility and responsiveness in mind.
+        The goal of Stole UI is to &quot; bridge the gap between design and development &quot;. Instead of starting from scratch every time, you can explore, reuse, and remix elements to speed up your workflow. Every component is built using modern technologies like Next.js, Tailwind CSS, and designed with accessibility and responsiveness in mind.
       </p>
 
       <p>
-        The name "Stole UI" reflects the ethos of open collaboration — we believe in learning by observing great work, improving it, and contributing back. It’s about celebrating community-driven innovation and empowering developers to build beautiful UIs faster.
+        The name &quot;Stole UI&quot; reflects the ethos of open collaboration — we believe in learning by observing great work, improving it, and contributing back. It&apos;s about celebrating community-driven innovation and empowering developers to build beautiful UIs faster.
       </p>
 
       <p>
-        This project is not just a component library. It's also a place to:
+        This project is not just a component library. It&apos;s also a place to:
       </p>
 
       <ul className="list-disc list-inside space-y-2 ml-2">
@@ -35,11 +35,11 @@ const AboutPage = () => {
       <h2 className="text-2xl font-semibold text-white">About the Developer</h2>
 
       <p>
-        Hi! I’m <strong>Divyanshu Sharma</strong>, a passionate developer who loves building tools that help other developers. I created Stole UI to make it easier for people like me to access well-designed, production-ready components without needing to browse through endless design sites or rebuild the same things repeatedly.
+        Hi! I&apos;m <strong>Divyanshu Sharma</strong>, a passionate developer who loves building tools that help other developers. I created Stole UI to make it easier for people like me to access well-designed, production-ready components without needing to browse through endless design sites or rebuild the same things repeatedly.
       </p>
 
       <p>
-        Stole UI is a passion project — something I’m actively building and improving based on community feedback. I believe in open source, clean code, and sharing knowledge. If you're enjoying the project or want to contribute, feel free to connect with me!
+        Stole UI is a passion project — something I&apos;m actively building and improving based on community feedback. I believe in open source, clean code, and sharing knowledge. If you&apos;re enjoying the project or want to contribute, feel free to connect with me!
       </p>
 
       <div className="flex items-center gap-4 pt-6">

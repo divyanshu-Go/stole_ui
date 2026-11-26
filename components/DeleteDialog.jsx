@@ -11,7 +11,7 @@ const DeleteDialog = ({ deleteDialogOpen, setDeleteDialogOpen, elementToDelete, 
         
         {/* Description */}
         <p className="text-sm text-gray-400 mt-2">
-          This will permanently delete the "<span className="font-semibold">{elementToDelete?.category}</span>". 
+          This will permanently delete the &quot;<span className="font-semibold">{elementToDelete?.category}</span>&quot;. 
           This action cannot be undone.
         </p>
 

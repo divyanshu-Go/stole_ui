@@ -10,7 +10,7 @@ export default function Navbar() {
     <header className="px-5 py-3 bg-gray-400 shadow-sm">
       <nav className="flex justify-between items-center">
         <Link href="/">
-          <img />
+          <img alt="" />
         </Link>
 
         <div className="flex items-center gap-5">
