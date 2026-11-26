@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ClientLayout from "@/components/ClientLayout";
 import { Toaster } from "sonner";
 import { getCategoriesFromDB } from "@/lib/server/category";
+import { SITE_URL } from "@/lib/site-url";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,8 +14,31 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Stole-UI - Free CSS Elements",
-  description: "Discover and share beautiful CSS components",
+  metadataBase: SITE_URL,
+  title: {
+    default: "Stole UI — Free CSS & UI Components",
+    template: "%s | Stole UI",
+  },
+  description:
+    "Discover, customize, and share free CSS and UI components made by the developer community.",
+  applicationName: "Stole UI",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Stole UI",
+    title: "Stole UI — Free CSS & UI Components",
+    description:
+      "Discover, customize, and share free CSS and UI components made by the developer community.",
+    url: "/",
+  },
+  twitter: {
+    card: "summary",
+    title: "Stole UI — Free CSS & UI Components",
+    description:
+      "Discover, customize, and share free CSS and UI components made by the developer community.",
+  },
 };
 
 export default async function RootLayout({ children }) {

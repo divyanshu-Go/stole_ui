@@ -3,6 +3,15 @@ import React from "react";
 import Link from "next/link";
 import { Github } from "lucide-react";
 
+export const metadata = {
+  title: "About Stole UI",
+  description:
+    "Learn about Stole UI, a community-driven collection of free CSS components and design inspiration.",
+  alternates: {
+    canonical: "/about",
+  },
+};
+
 const AboutPage = () => {
   return (
     <div className=" max-w-7xl mx-auto px-4 py-8 text-slate-300 space-y-8">

@@ -12,6 +12,35 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const element = await getElementByIdFromDB(id);
+
+  if (!element) {
+    return {
+      title: "UI Component Not Found",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = element.title || "Free CSS UI Component";
+  const description =
+    element.description ||
+    `Preview and get the code for this free ${element.category || "CSS"} UI component on Stole UI.`;
+  const canonical = `/elements/elementId/${id}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+    },
+  };
+}
+
 export default async function ElementPage({ params }) {
   const resolvedParams = await params;
   const elementId = resolvedParams.id;

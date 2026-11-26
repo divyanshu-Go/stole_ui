@@ -5,6 +5,15 @@ import { getApprovedElementsFromDB } from "@/lib/server/element";
 import { getCategoriesFromDB } from "@/lib/server/category";
 export const revalidate = 300;
 
+export const metadata = {
+  title: "Browse UI Components",
+  description:
+    "Explore free, community-made CSS components by category. Preview each design and view its reusable code.",
+  alternates: {
+    canonical: "/elements",
+  },
+};
+
 export default async function ElementsPage() {
   const elements = await getApprovedElementsFromDB();
   const categories = await getCategoriesFromDB();

@@ -14,6 +14,39 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }) {
+  const { category: categoryParam } = await params;
+  const categories = await getCategoriesFromDB();
+  const category = categories.find(
+    (item) =>
+      item.href.split("/").pop() === categoryParam ||
+      item.name.toLowerCase() === categoryParam
+  );
+
+  if (!category) {
+    return {
+      title: "Category Not Found",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${category.name} UI Components`;
+  const description = `Browse free ${category.name} UI components made with CSS. Preview designs and explore reusable code.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/elements/${category.href.split("/").pop()}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/elements/${category.href.split("/").pop()}`,
+    },
+  };
+}
+
 export default async function CategoryPage({ params }) {
   const resolvedParams = await params;
   const categories = await getCategoriesFromDB();

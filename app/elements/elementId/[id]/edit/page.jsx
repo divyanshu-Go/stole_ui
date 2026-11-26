@@ -4,6 +4,10 @@ import EditElementClient from "./EditElementClient";
 import { getElementByIdFromDB } from "@/lib/server/element";
 
 export const dynamic = "force-dynamic";
+export const metadata = {
+  title: "Edit UI Component",
+  robots: { index: false, follow: false },
+};
 
 export default async function EditElementPage({ params }) {
   const { id: elementId } = await params;
